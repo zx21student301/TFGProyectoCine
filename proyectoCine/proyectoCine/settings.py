@@ -77,9 +77,9 @@ WSGI_APPLICATION = 'proyectoCine.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'nombreBD',
-        'USER': 'usuarioBD',
-        'PASSWORD': 'contraseñaBD',
+        'NAME': 'proyectoCineDB',
+        'USER': 'proyectoCineDB',
+        'PASSWORD': 'proyectoCineDB',
         'HOST': 'localhost',
         'PORT': '3306',        
     }
