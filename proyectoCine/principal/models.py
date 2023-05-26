@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import Pelicula, Sala
+from django.contrib.auth.models import Pelicula, Sala, Usuario, Funcion, Entrada
 
 # Create your models here.
 
@@ -61,16 +61,43 @@ class Usuario(models.Model):
     apellido = models.CharField(max_length=700)
     correoElectronico = models.CharField(max_length=700)
     contraseña = models.CharField(max_length=700)
-    created = models.DateTimeField(
-        auto_now_add=True, verbose_name='Fecha de creación')
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creación')
 
     class Meta:
-        verbose_name = 'funcion'
-        verbose_name_plural = "funciones"
+        verbose_name = 'usuario'
+        verbose_name_plural = "usuarios"
         ordering = ['-created']
 
     def __str__(self):
-        return self.fechaInicio
+        return self.nombre
+    
+class Entrada(models.Model):
+    precio = models.FloatField(verbose_name='Precio')
+    usuario = models.ForeignKey(Usuario, verbose_name='Usuario' , on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creación')
+
+    class Meta:
+        verbose_name = 'entrada'
+        verbose_name_plural = "entradas"
+        ordering = ['-created']
+
+class Butaca(models.Model):
+    estado = models.CharField(max_length=255, default='Disponible', verbose_name='Estado')
+    funcion = models.ForeignKey(Funcion, on_delete=models.CASCADE, verbose_name='Funcion')
+    entrada = models.ForeignKey(Entrada, on_delete=models.CASCADE, null=True, verbose_name='Entrada')
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creación')
+
+    class Meta:
+        verbose_name = 'butaca'
+        verbose_name_plural = "butacas"
+        ordering = ['-created']
+
+class Comentario(models.Model):
+    usuario = models.ForeignKey(Usuario, verbose_name='Usuario' , on_delete=models.CASCADE)
+    pelicula = models.ForeignKey(Pelicula, verbose_name='Pelicula' , on_delete=models.CASCADE)
+    comentario = models.TextField()
+    puntuacion = models.IntegerField()
+
 
 
 # CREATE TABLE Películas (
