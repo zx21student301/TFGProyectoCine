@@ -61,6 +61,7 @@ class Usuario(models.Model):
     apellido = models.CharField(max_length=700)
     correoElectronico = models.CharField(max_length=700)
     contraseña = models.CharField(max_length=700)
+    administrador = models.BooleanField(default=False, verbose_name='Administrador')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creación')
 
     class Meta:
