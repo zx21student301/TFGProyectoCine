@@ -1,12 +1,12 @@
 from django.db import models
-from django.contrib.auth.models import Pelicula, Sala, Usuario, Funcion, Entrada
+
 
 # Create your models here.
 
 
 class Pelicula(models.Model):
     titulo = models.CharField(max_length=700, verbose_name='Titulo')
-    imagen = models.ImageField(verbose_name='foto ', upload_to='peliculas', verbose_name='imagen')
+    imagen = models.ImageField( upload_to='peliculas', verbose_name='Imagen')
     genero = models.CharField(max_length=255, verbose_name='Genero')
     duracion = models.CharField(max_length=255, verbose_name='Duracion')
     sinopsis = models.TextField(verbose_name='Sinopsis')
@@ -95,33 +95,36 @@ class Butaca(models.Model):
 class Comentario(models.Model):
     usuario = models.ForeignKey(Usuario, verbose_name='Usuario' , on_delete=models.CASCADE)
     pelicula = models.ForeignKey(Pelicula, verbose_name='Pelicula' , on_delete=models.CASCADE)
-    comentario = models.TextField()
-    puntuacion = models.IntegerField()
+    comentario = models.TextField(verbose_name='Comentario')
+    puntuacion = models.IntegerField(verbose_name='Puntuacion')
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creación')
 
+    class Meta:
+        verbose_name = 'comentario'
+        verbose_name_plural = "comentarios"
+        ordering = ['-created']
 
+class Promocion(models.Model):
+    nombre = models.CharField(max_length=255, verbose_name='Nombre')
+    descripcion = models.TextField(verbose_name='Descripcion')
+    descuento = models.FloatField(verbose_name='Descuento')
+    tipoDescuento = models.CharField(max_length=255, verbose_name='Tipo de descuento')
+    maxDescuento = models.FloatField(verbose_name='Maximo de descuento')
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creación')
 
-# CREATE TABLE Películas (
-#   titulo VARCHAR(255),
-#   genero VARCHAR(255),
-#   duracion INT,
-#   sinopsis TEXT,
-#   director VARCHAR(255),
-#   fechaLanzamiento VARCHAR(255),
-#   clasificacionEdad VARCHAR(50),
-#   valoracion float
-# );
+    class Meta:
+        verbose_name = 'promocion'
+        verbose_name_plural = "promociones"
+        ordering = ['-created']
 
-# CREATE TABLE Butacas (
-#   Función INT,
-#   Estado VARCHAR(50),
-#   Entrada INT,
-#   FOREIGN KEY (Función) REFERENCES Funciones(ID),
-#   FOREIGN KEY (Entrada) REFERENCES Entradas(ID)
-# );
+class UsuarioPromocion(models.Model):
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, verbose_name='Usuario')
+    promocion = models.ForeignKey(Promocion, on_delete=models.CASCADE, verbose_name='Promocion')
+    utilizada = models.BooleanField(default=False, verbose_name='Utilizada')
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creación')
 
-# CREATE TABLE Usuarios (
-#   nombre VARCHAR(700),
-#   apellido VARCHAR(700),
-#   correoElectronico VARCHAR(700),
-#   contraseña VARCHAR(700)
-# );
+    class Meta:
+        verbose_name = 'Usuario y Promocion'
+        verbose_name_plural = "Usuarios y Promociones"
+        ordering = ['-created']
+
