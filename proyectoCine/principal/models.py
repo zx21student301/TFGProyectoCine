@@ -11,13 +11,10 @@ class Pelicula(models.Model):
     duracion = models.CharField(max_length=255, verbose_name='Duracion')
     sinopsis = models.TextField(verbose_name='Sinopsis')
     director = models.CharField(max_length=255, verbose_name='Director')
-    fechaLanzamiento = models.CharField(
-        max_length=700, verbose_name='Fecha de lanzamiento')
-    clasificacionEdad = models.CharField(
-        max_length=255, verbose_name='Clasificacion edad')
+    fechaLanzamiento = models.CharField(max_length=700, verbose_name='Fecha de lanzamiento')
+    clasificacionEdad = models.CharField(max_length=255, verbose_name='Clasificacion edad')
     valoracion = models.FloatField(verbose_name='Valoracion')
-    created = models.DateTimeField(
-        auto_now_add=True, verbose_name='Fecha de creación')
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creación')
 
     class Meta:
         verbose_name = 'pelicula'
@@ -30,10 +27,8 @@ class Pelicula(models.Model):
 
 class Sala(models.Model):
     nombre = models.CharField(max_length=255, verbose_name='Capacidad maxima')
-    capacidadMaxima = models.CharField(
-        max_length=255, verbose_name='Capacidad maxima')
-    created = models.DateTimeField(
-        auto_now_add=True, verbose_name='Fecha de creación')
+    capacidadMaxima = models.CharField(max_length=255, verbose_name='Capacidad maxima')
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creación')
 
     class Meta:
         verbose_name = 'sala'
@@ -48,12 +43,9 @@ class Funcion(models.Model):
     fecha = models.DateField(verbose_name='Fecha')
     fechaInicio = models.DateTimeField(verbose_name='Hora inicio')
     fechaFin = models.DateTimeField(verbose_name='Hora fin')
-    pelicula = models.ForeignKey(
-        Pelicula, verbose_name='Pelicula', on_delete=models.CASCADE)
-    sala = models.ForeignKey(Sala, verbose_name='Sala',
-                             on_delete=models.CASCADE)
-    created = models.DateTimeField(
-        auto_now_add=True, verbose_name='Fecha de creación')
+    pelicula = models.ForeignKey(Pelicula, verbose_name='Pelicula', on_delete=models.CASCADE)
+    sala = models.ForeignKey(Sala, verbose_name='Sala', on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creación')
 
     class Meta:
         verbose_name = 'funcion'
