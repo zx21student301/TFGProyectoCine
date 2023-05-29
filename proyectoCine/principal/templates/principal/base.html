@@ -1,45 +1,67 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
+
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nombre Cine</title>
+    <link rel="shortcut icon" href="{% static 'principal/img/icon.png' %}">
+    <title>CinesApp</title>
+
+
     <!-- Latest compiled and minified CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
 
+
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js "></script>
+
+
+    <!-- Nuestro css personalizado -->
+    <link rel="stylesheet" href="{% static 'principal/css/estilos.css' %}">
+
+
+    <!-- Accedemos a JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <!-- Nuestro js personalizado -->
+    <script src="{% static 'principal/js/scripts.js' %}"></script>
+
+
+
+
 </head>
+
 
 <body>
     <header>
-        <div class="container-fluid">
+        <div class="container-fluid header-container">
             <div class="row">
                 <div class="col-md-2 col-sm-1"></div>
-                <div class="col-md-8 col-sm-10" style="background-color: red;">
+                <div class="col-md-8 col-sm-10" style="background-color: #e50914;" >
+                    {% comment %}  {% endcomment %}
                     <div class="row">
                         <div class="titulo col-md-2">
-                            Logo
+                            <img src="{% static 'principal/img/logo.png' %}" style="width:50%" alt="logo">
                         </div>
-                        <div class="titulo col-md-2">
-                            Noticias
+                        <div class="titulo col-md-2"><a href="#noticias">Noticias</a>
                         </div>
-                        <div class="titulo col-md-2">
-                            Destacadas
+                        <div class="titulo col-md-2"><a href="#destacadas">Destacadas</a>
+
+
                         </div>
-                        <div class="titulo col-md-2">
-                            Películas
+                        <div class="titulo col-md-2"><a href="#peliculas">Películas</a>
+
+
                         </div>
-                        <div class="titulo col-md-2">
-                            Contacto
+                        <div class="titulo col-md-3 buscador-sty"><input type="text" id="searchInput" class="form-control" style="height:70%;" placeholder="Buscar" href="#peliculas">
                         </div>
-                        <div class="titulo col-md-1">
-                            Buscador
-                        </div>
-                        <div class="titulo col-md-1">
-                            <a href="{% url 'registro' %}">Registrarse</a>
+                        <div class="titulo col-md-1"><a href="#noticias">Cuenta</a>
+
+
                         </div>
                     </div>
                 </div>
@@ -47,6 +69,245 @@
             </div>
         </div>
     </header>
+
+
+    <div class="container mt-5">
+        <!-- Noticias -->
+        <h3 id="noticias">Noticias</h3>
+        <div id="carouselExampleIndicators" class="carousel  carousel-container" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{% static 'principal/img/noticia1.jpg' %}" class="d-block w-100 imgcarousel"
+                        alt="Noticia 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'principal/img/noticia2.jpg' %}" class="d-block w-100" alt="Noticia 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'principal/img/noticia3.jpg' %}" class="d-block w-100" alt="Noticia 3">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+        </div>
+
+
+        <div class="row mt-5">
+            <!-- Destacadas -->
+            <h3 id="destacadas">Destacadas</h3>
+
+
+            <div class="col-md-4">
+                <div class="card-destacados" style="align-items: center; text-align: center;">
+                    <img src="{% static 'principal/img/img1.jpeg' %}" class="card-img-top-desc" alt="Pelicula 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Pelicula 1</h5>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card-destacados" style="align-items: center; text-align: center;">
+                    <img src="{% static 'principal/img/img2.jpeg' %}" class="card-img-top-desc" alt="Pelicula 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Pelicula 2</h5>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card-destacados" style="align-items: center; text-align: center;">
+                    <img src="{% static 'principal/img/img3.jpeg' %}" class="card-img-top-desc" alt="Pelicula 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Pelicula 3</h5>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row mt-5">
+            <!-- Catálogo -->
+            <h3 id="peliculas">Catálogo</h3>
+
+
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 4">
+                    <div class="card-body">
+                        <h5 class="card-title card-catalogo">Pelicula 4</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 5">
+                    <div class="card-body">
+                        <h5 class="card-title card-catalogo">Pelicula 5</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 6">
+                    <div class="card-body">
+                        <h5 class="card-title card-catalogo">Pelicula 6</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 7">
+                    <div class="card-body">
+                        <h5 class="card-title card-catalogo">Pelicula 7</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 8">
+                    <div class="card-body">
+                        <h5 class="card-title card-catalogo">Pelicula 8</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 9">
+                    <div class="card-body">
+                        <h5 class="card-title card-catalogo">Pelicula 9</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 10">
+                    <div class="card-body">
+                        <h5 class="card-title card-catalogo">Pelicula 10</h5>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 11">
+                    <div class="card-body">
+                        <h5 class="card-title card-catalogo">Pelicula 11</h5>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 12">
+                    <div class="card-body">
+                        <h5 class="card-title card-catalogo">Pelicula 12</h5>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 13">
+                    <div class="card-body">
+                        <h5 class="card-title card-catalogo">Pelicula 13</h5>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 14">
+                    <div class="card-body">
+                        <h5 class="card-title card-catalogo">Pelicula 14</h5>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 15">
+                    <div class="card-body">
+                        <h5 class="card-title card-catalogo">Pelicula 15</h5>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 16">
+                    <div class="card-body">
+                        <h5 class="card-title card-catalogo">Pelicula 16</h5>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 17">
+                    <div class="card-body">
+                        <h5 class="card-title card-catalogo">Pelicula 17</h5>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 18">
+                    <div class="card-body">
+                        <h5 class="card-title card-catalogo">Pelicula 18</h5>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 19">
+                    <div class="card-body">
+                        <h5 class="card-title card-catalogo">Pelicula 19</h5>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="bg-dark text-white text-center p-3 mt-5">
+        <h4>Contáctanos</h4>
+        &copy; 2023 CinesApp. Todos los derechos reservados.
+    </footer>
 </body>
+
 
 </html>
