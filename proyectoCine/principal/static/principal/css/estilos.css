@@ -156,6 +156,7 @@ a:hover {
     align-items: center;
     margin-bottom: -25px;
     z-index: 3;
+    transition: background-color 0.5s;
 }
 
 .image-container {
@@ -173,7 +174,7 @@ a:hover {
     left: -15px;
 }
 
-  .image-container::before {
+.image-container::before {
     content: "";
     position: absolute;
     top: 0;
@@ -183,8 +184,43 @@ a:hover {
     background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 100%);
 
     z-index: 1;
-  }
+}
 
-  .imgPelicula{
+.imgPelicula {
     width: 100%;
-  }
+}
+
+.imgPeliculaPrincipal {
+    width: 200px;
+    height: 300px;
+}
+
+.contPeliculaPrincipal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* Si deseas que los elementos estén apilados verticalmente */
+}
+
+.tituloPeliculaPrincipal {
+    font-family: Machine, Helvetica, Arial, sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    position: relative;
+}
+
+.linkTrailerPrincipal {
+    width: fit-content;
+    border-bottom-right-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: -25px;
+    margin-left: -150px;
+    z-index: 3;
+}
+
+.divTrailer:hover {
+    background-color: lightblue;
+}

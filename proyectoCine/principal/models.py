@@ -16,6 +16,7 @@ class Pelicula(models.Model):
     fechaLanzamiento = models.CharField(max_length=700, verbose_name='Fecha de lanzamiento')
     clasificacionEdad = models.CharField(max_length=255, verbose_name='Clasificacion edad')
     valoracion = models.FloatField(verbose_name='Valoracion')
+    disponible = models.BooleanField(default=True, verbose_name='Disponible')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creación')
 
     class Meta:
