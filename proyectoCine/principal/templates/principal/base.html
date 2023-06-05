@@ -47,8 +47,7 @@
                         <div class="col-md-10 my-2 col-sm-1">
                             <div class="row lead">
                                 <div class="titulo col-md-2" id="tituloPrincipal">
-
-
+                                    <a href="{% url 'index' %}">
                                     <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="32.000000pt"
                                         height="32.000000pt" viewBox="0 0 500.000000 500.000000"
                                         preserveAspectRatio="xMidYMid meet">
@@ -63,7 +62,7 @@
                                         </g>
                                     </svg>
                                     Cines App
-
+                                    </a>
                                 </div>
                                 <div class="titulo col-md-2 "><a href="#noticias">Noticias</a>
                                 </div>
@@ -77,6 +76,7 @@
                                 </div>
 
                                 <div class="titulo col-md-2">
+                                    <a href="#peliculas">
                                     <div class="divForm">
                                         <form class="formBusqueda" method="GET" action="/search?" id="searchBoxForm">
                                             <div class="searchContainer">
@@ -89,8 +89,9 @@
                                             </div>
                                         </form>
                                     </div>
+                                    </a>
                                 </div>
-                                <div class="titulo col-md-2 text-nowrap" id="divCuentas"><span id="registrarseID">Registrarse</span> &nbsp &nbsp <span id="iniciarID">Iniciar Sesion</span>
+                                <div class="titulo col-md-2 text-nowrap" id="divCuentas"><span id="registrarseID"><a href="{% url 'registro' %}"> Registrarse</a></span> <span id="iniciarID"><a href="{% url 'login' %}">Iniciar Sesion</a></span>
                                 </div>
                                 
                             </div>
@@ -358,57 +359,8 @@
     <footer class="bg-dark text-white text-center p-3 mt-5">
         <h4>Contáctanos</h4>
         &copy; 2023 CinesApp. Todos los derechos reservados.
-    </footer>
-    
-    <div class="divCuentas">
-        {% comment %} <ul class="custom-tab-group">
-            <li class="custom-tab" id="tituloReg"><a href="#custom-signup">Registrarse</a></li>
-            <li class="custom-tab" id="tituloIni"><a href="#custom-login">Iniciar Sesion</a></li>
-        </ul>
 
-        
-        <div class="custom-tab-content">
-            <div id="custom-formulario">
-                <h1>Registrarse</h1>
-                <form action="/" method="post">
-                    <div class="custom-top-row">
-                        <div class="custom-field-wrap">
-                            <input type="text" required autocomplete="off" placeholder="Nombre*" >
-                        </div>
-                        <div class="custom-field-wrap">
-                            <input type="text" required autocomplete="off" placeholder="Apellidos*">
-                        </div>
-                    </div>
-                    <div class="custom-field-wrap">
-                        <input type="email" required autocomplete="off" placeholder="Correo electronico"/>
-                    </div>
-                    <div class="custom-field-wrap">
-                        <input type="password" required autocomplete="off" placeholder="Contraseña*">
-                    </div>
-                    <button type="submit" class="button button-block">Get Started</button>
-                </form>
-            </div>
-            <div id="custom-login">
-                <h1>Welcome Back!</h1>
-                <form action="/" method="post">
-                    <div class="custom-field-wrap">
-                        <label>
-                            Email Address<span class="req">*</span>
-                        </label>
-                        <input type="email" required autocomplete="off" />
-                    </div>
-                    <div class="custom-field-wrap">
-                        <label>
-                            Password<span class="req">*</span>
-                        </label>
-                        <input type="password" required autocomplete="off" />
-                    </div>
-                    <p class="forgot"><a href="#">Forgot Password?</a></p>
-                    <button class="button button-block">Log In</button>
-                </form>
-            </div>
-        </div> {% endcomment %}
-    </div> 
+    </footer>
 
 </body>
 
