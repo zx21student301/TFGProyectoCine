@@ -6,10 +6,16 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from .models import Pelicula
+
 # Create your views here.
-def index(request):
-    template = loader.get_template("principal/base.html")
-    return HttpResponse(template.render())
+class PeliculaListView(ListView):
+    model = Pelicula
+    
+class PeliculaDetailView(DetailView):
+    model = Pelicula
 
 def register_view(request):
     if request.method == 'POST':
