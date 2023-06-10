@@ -1,5 +1,9 @@
 from django.urls import path
+
 from .views import *
+
+from .views import PeliculaListView,PeliculaDetailView
+
 from . import views
 
 urlpatterns = [
@@ -8,4 +12,5 @@ urlpatterns = [
     path('administracion/',  views.administracion ,name='administracion'),
     path('administracion/peliculas',  PeliculaAdminListView.as_view() ,name='listadoPelisAdmin'),
     path('administracion/peliculas/crear',  PeliculaCreatelView.as_view() ,name='crearPelisAdmin'),
+    path('register/', views.register_view, name='register_view'),
 ]
