@@ -20,10 +20,14 @@ from django.conf import settings
 
 urlpatterns = [
     path('', include('principal.urls')),
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, ),
+    path('administracion', include('principal.urls')),
 
-    path('cuentas/',include('django.contrib.auth.urls')),
-    path('cuentas/',include('registration.urls')),
+    
+
+    path('accounts/',include('django.contrib.auth.urls')),
+    path('accounts/',include('registration.urls')),
+    path('accounts/profile/',include('principal.urls')),
 ]
 
 if settings.DEBUG:

@@ -91,7 +91,14 @@
                                     </div>
                                     </a>
                                 </div>
-                                <div class="titulo col-md-2 text-nowrap" id="divCuentas"><span id="registrarseID"><a href="{% url 'registro' %}"> Registrarse</a></span> <span id="iniciarID"><a href="{% url 'login' %}">Iniciar Sesion</a></span>
+                                <div class="titulo col-md-2 text-nowrap" id="divCuentas">
+                                    {% if not request.user.is_authenticated %}
+                                    <span id="registrarseID"><a href="{% url 'registro' %}"> Registrarse</a></span> 
+                                    <span id="iniciarID"><a href="{% url 'iniSesion' %}">Iniciar Sesion</a></span>
+                                    {% else %}
+                                        <a href="{% url 'logout' %}">Mi cuenta</a>
+                                        <a href="{% url 'logout' %}">Salir</a>
+                                    {% endif %}
                                 </div>
                                 
                             </div>
