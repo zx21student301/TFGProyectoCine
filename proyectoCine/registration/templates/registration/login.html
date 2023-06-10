@@ -37,7 +37,7 @@
                         <div class="col-md-10 my-2 col-sm-1">
                             <div class="row lead">
                                 <div class="titulo col-md-2" id="tituloPrincipal">
-                                    <a href="{% url 'index' %}">
+                                    <a href="{% url 'listado' %}">
                                     <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="32.000000pt"
                                         height="32.000000pt" viewBox="0 0 500.000000 500.000000"
                                         preserveAspectRatio="xMidYMid meet">
@@ -54,19 +54,19 @@
                                     Cines App
                                 </a>
                                 </div>
-                                <div class="titulo col-md-2 "><a href="{% url 'index' %}">Noticias</a>
+                                <div class="titulo col-md-2 "><a href="{% url 'listado' %}">Noticias</a>
                                 </div>
-                                <div class="titulo col-md-2"><a href="{% url 'index' %}">Destacadas</a>
+                                <div class="titulo col-md-2"><a href="{% url 'listado' %}">Destacadas</a>
 
 
                                 </div>
-                                <div class="titulo col col-md-2"><a href="{% url 'index' %}">Películas</a>
+                                <div class="titulo col col-md-2"><a href="{% url 'listado' %}">Películas</a>
 
 
                                 </div>
 
                                 <div class="titulo col-md-2">
-                                    <a href="{% url 'index' %}">
+                                    <a href="{% url 'listado' %}">
                                         <div class="divForm">
                                             <form class="formBusqueda" method="GET" action="/search?" id="searchBoxForm">
                                                 <div class="searchContainer">
@@ -97,33 +97,21 @@
     <div class="divCuentas">
         <form action="" method="post">
             {% csrf_token %}
-
-       <ul class="custom-tab-group">
+            {{ form.as_p }}
+             <ul class="custom-tab-group">
                  <li class="custom-tab" id="tituloReg"><a href="{% url 'registro' %}">Regístrate</a></li>
                  <li class="custom-tab active" id="tituloIni"><a href="#custom-login">Iniciar Sesión</a></li>
                 </ul>
                      <div id="custom-formulario">
-                            <h1>Iniciar Sesión</h1>
-                            {% csrf_token %}
+                          <h1>Iniciar Sesión</h1>
                             <div class="custom-field-wrap">
-                                <input placeholder="Nombre de usuario*" type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username" data-dashlane-rid="03715f48b8484abe" data-form-type="username" data-kwimpalastatus="alive" data-kwimpalaid="1686337712386-0">
+                                <input placeholder="Nombre de usuario*" type="text" name="username" maxlength="150" id="username" data-dashlane-rid="fe15f2986d256fa8" data-kwimpalastatus="alive" data-kwimpalaid="1685974895644-3" data-form-type="name,last">
                             </div>
                             <div class="custom-field-wrap">
                                 <input placeholder="Contraseña*" type="password" name="password" autocomplete="current-password" required="" id="id_password" data-dashlane-rid="59a8c264ebc8a306" data-form-type="password" data-kwimpalastatus="alive" data-kwimpalaid="1685977926162-1">
                             </div>  
-
-
-                                <span class="helptext">
-                                    {% if messages %}
-                                    <ul class="messages">
-                                      {% for message in messages %}
-                                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                                      {% endfor %}
-                                    </ul>
-                                  {% endif %}
-                                </span>
-                           
                             <input type="submit" class="button button-block" value="Iniciar Sesión"></p>
+
                       </div>
 
             </form>

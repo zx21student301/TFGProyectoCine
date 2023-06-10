@@ -47,7 +47,7 @@
                         <div class="col-md-10 my-2 col-sm-1">
                             <div class="row lead">
                                 <div class="titulo col-md-2" id="tituloPrincipal">
-                                    <a href="{% url 'index' %}">
+                                    <a href="{% url 'listado' %}">
                                     <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="32.000000pt"
                                         height="32.000000pt" viewBox="0 0 500.000000 500.000000"
                                         preserveAspectRatio="xMidYMid meet">
@@ -76,6 +76,7 @@
                                 </div>
 
                                 <div class="titulo col-md-2">
+                                    <a href="#peliculas">
                                     <div class="divForm">
                                         <form class="formBusqueda" method="GET" action="/search?" id="searchBoxForm">
                                             <div class="searchContainer">
@@ -85,23 +86,20 @@
                                                         d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                                                 </svg><input name="keywords" type="text" value="" id="barraBusqueda"
                                                     placeholder="Buscar" class="Search__input" autocomplete="off">
-                                            
                                             </div>
                                         </form>
                                     </div>
                                     </a>
                                 </div>
-                                {% if not request.user.is_authenticated %}
                                 <div class="titulo col-md-2 text-nowrap" id="divCuentas">
+                                    {% if not request.user.is_authenticated %}
                                     <span id="registrarseID"><a href="{% url 'registro' %}"> Registrarse</a></span> 
                                     <span id="iniciarID"><a href="{% url 'iniSesion' %}">Iniciar Sesion</a></span>
+                                    {% else %}
+                                        <a href="{% url 'logout' %}">Mi cuenta</a>
+                                        <a href="{% url 'logout' %}">Salir</a>
+                                    {% endif %}
                                 </div>
-                                {% else %}
-                                <div class="titulo col-md-2 text-nowrap" id="divCuentas">
-                                    <span id="registrarseID"><a href="{% url 'registro' %}"> Mi cuenta</a></span> 
-                                    <span id="iniciarID"><a href="{% url 'logout' %}">Salir</a></span>
-                                </div>
-                                {% endif %}
                                 
                             </div>
                         </div>
@@ -157,7 +155,7 @@
 
 
             <div class="col-md-4 contPeliculaPrincipal">
-                <a href="" class="linkTrailerPrincipal">
+                <a href="https://youtu.be/_1f2RLdxQfA" class="linkTrailerPrincipal">
                     <div class="divTrailer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
                             <path d="M8 5v14l11-7z" fill="#ffffff" />
@@ -167,10 +165,10 @@
                 <a href="">
                     <img src="{% static 'principal/img/img1.jpeg' %}" class="imgPeliculaPrincipal" alt="">
                 </a>
-                <p class="tituloPeliculaPrincipal">FAST & FURIUS X</p>
+                <p class="tituloPeliculaPrincipal w-100 h-100 text-center">Super Mario Bros: La película</p>
             </div>
             <div class="col-md-4 contPeliculaPrincipal">
-                <a href="" class="linkTrailerPrincipal">
+                <a href="https://youtu.be/9SfnkovRye8" class="linkTrailerPrincipal">
                     <div class="divTrailer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
                             <path d="M8 5v14l11-7z" fill="#ffffff" />
@@ -180,10 +178,10 @@
                 <a href="">
                     <img src="{% static 'principal/img/img2.jpeg' %}" class="imgPeliculaPrincipal" alt="">
                 </a>
-                <p class="tituloPeliculaPrincipal">FAST & FURIUS X</p>
+                <p class="tituloPeliculaPrincipal w-100 h-100 text-center">Guardianes de la Galaxia Vol.3</p>
             </div>
             <div class="col-md-4 contPeliculaPrincipal">
-                <a href="" class="linkTrailerPrincipal">
+                <a href="https://youtu.be/IWMC7FW81MQ" class="linkTrailerPrincipal">
                     <div class="divTrailer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
                             <path d="M8 5v14l11-7z" fill="#ffffff" />
@@ -193,7 +191,7 @@
                 <a href="">
                     <img src="{% static 'principal/img/img3.jpeg' %}" class="imgPeliculaPrincipal" alt="">
                 </a>
-                <p class="tituloPeliculaPrincipal">Pelicula 3</p>
+                <p class="tituloPeliculaPrincipal w-100 h-100 text-center">La sirenita</p>
             </div>
         </div>
 
@@ -201,166 +199,7 @@
         <div class="row mt-5">
             <!-- Catálogo -->
             <h3 id="peliculas">Catálogo</h3>
-
-
-            <div class="col-md-3 peliculaCont">
-                <a href="" class="linkTrailer">
-                    <div class="divTrailer">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
-                            <path d="M8 5v14l11-7z" fill="#ffffff" />
-                        </svg>
-                    </div>
-                </a>
-                <div class="image-container">
-                    <img src="{% static 'principal/img/poster.jpeg' %}" class="imgPelicula" alt="">
-                </div>
-                <p class="tituloPelicula">FAST & FURIUS X</p>
-            </div>
-            <div class="col-md-3 peliculaCont">
-                <a href="" class="linkTrailer">
-                    <div class="divTrailer">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
-                            <path d="M8 5v14l11-7z" fill="#ffffff" />
-                        </svg>
-                    </div>
-                </a>
-                <div class="image-container">
-                    <img src="{% static 'principal/img/poster.jpeg' %}" class="imgPelicula" alt="">
-                </div>
-                <p class="tituloPelicula">FAST & FURIUS X</p>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 6">
-                    <div class="card-body">
-                        <h5 class="card-title card-catalogo">Pelicula 6</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 7">
-                    <div class="card-body">
-                        <h5 class="card-title card-catalogo">Pelicula 7</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 8">
-                    <div class="card-body">
-                        <h5 class="card-title card-catalogo">Pelicula 8</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 9">
-                    <div class="card-body">
-                        <h5 class="card-title card-catalogo">Pelicula 9</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 10">
-                    <div class="card-body">
-                        <h5 class="card-title card-catalogo">Pelicula 10</h5>
-
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 11">
-                    <div class="card-body">
-                        <h5 class="card-title card-catalogo">Pelicula 11</h5>
-
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 12">
-                    <div class="card-body">
-                        <h5 class="card-title card-catalogo">Pelicula 12</h5>
-
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 13">
-                    <div class="card-body">
-                        <h5 class="card-title card-catalogo">Pelicula 13</h5>
-
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 14">
-                    <div class="card-body">
-                        <h5 class="card-title card-catalogo">Pelicula 14</h5>
-
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 15">
-                    <div class="card-body">
-                        <h5 class="card-title card-catalogo">Pelicula 15</h5>
-
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 16">
-                    <div class="card-body">
-                        <h5 class="card-title card-catalogo">Pelicula 16</h5>
-
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 17">
-                    <div class="card-body">
-                        <h5 class="card-title card-catalogo">Pelicula 17</h5>
-
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 18">
-                    <div class="card-body">
-                        <h5 class="card-title card-catalogo">Pelicula 18</h5>
-
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="{% static 'principal/img/poster.jpeg' %}" class="card-img-top" alt="Pelicula 19">
-                    <div class="card-body">
-                        <h5 class="card-title card-catalogo">Pelicula 19</h5>
-
-
-                    </div>
-                </div>
-            </div>
+            {% block catalogo %}{% endblock %}
         </div>
     </div>
 
