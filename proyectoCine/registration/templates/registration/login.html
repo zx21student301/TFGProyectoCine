@@ -81,7 +81,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div class="titulo col-md-2 text-nowrap" id="divCuentas"><span id="registrarseID"><a href="{% url 'registro' %}"> Registrarse</a></span> <span id="iniciarID"><a href="{% url 'login' %}">Iniciar Sesion</a></span>
+                                <div class="titulo col-md-2 text-nowrap" id="divCuentas"><span id="registrarseID"><a href="{% url 'registro' %}"> Registrarse</a></span> <span id="iniciarID"><a href="{% url 'iniSesion' %}">Iniciar Sesion</a></span>
                                 </div>
                                 
                             </div>
@@ -97,21 +97,33 @@
     <div class="divCuentas">
         <form action="" method="post">
             {% csrf_token %}
-            {{ form.as_p }}
-            {% comment %} <ul class="custom-tab-group">
+
+       <ul class="custom-tab-group">
                  <li class="custom-tab" id="tituloReg"><a href="{% url 'registro' %}">Regístrate</a></li>
                  <li class="custom-tab active" id="tituloIni"><a href="#custom-login">Iniciar Sesión</a></li>
                 </ul>
                      <div id="custom-formulario">
-                          <h1>Iniciar Sesión</h1>
+                            <h1>Iniciar Sesión</h1>
+                            {% csrf_token %}
                             <div class="custom-field-wrap">
-                                <input placeholder="Apellidos*" type="text" name="last_name" maxlength="150" id="id_last_name" data-dashlane-rid="fe15f2986d256fa8" data-kwimpalastatus="alive" data-kwimpalaid="1685974895644-3" data-form-type="name,last">
+                                <input placeholder="Nombre de usuario*" type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username" data-dashlane-rid="03715f48b8484abe" data-form-type="username" data-kwimpalastatus="alive" data-kwimpalaid="1686337712386-0">
                             </div>
                             <div class="custom-field-wrap">
                                 <input placeholder="Contraseña*" type="password" name="password" autocomplete="current-password" required="" id="id_password" data-dashlane-rid="59a8c264ebc8a306" data-form-type="password" data-kwimpalastatus="alive" data-kwimpalaid="1685977926162-1">
-                            </div>  {% endcomment %}
-                            <input type="submit" class="button button-block" value="Iniciar Sesión"></p>
+                            </div>  
 
+
+                                <span class="helptext">
+                                    {% if messages %}
+                                    <ul class="messages">
+                                      {% for message in messages %}
+                                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                      {% endfor %}
+                                    </ul>
+                                  {% endif %}
+                                </span>
+                           
+                            <input type="submit" class="button button-block" value="Iniciar Sesión"></p>
                       </div>
 
             </form>

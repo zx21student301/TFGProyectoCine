@@ -81,7 +81,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div class="titulo col-md-2 text-nowrap" id="divCuentas"><span id="registrarseID"><a href="{% url 'registro' %}"> Registrarse</a></span> <span id="iniciarID"><a href="{% url 'login' %}">Iniciar Sesion</a></span>
+                                <div class="titulo col-md-2 text-nowrap" id="divCuentas"><span id="registrarseID"><a href="{% url 'registro' %}"> Registrarse</a></span> <span id="iniciarID"><a href="{% url 'iniSesion' %}">Iniciar Sesion</a></span>
                                 </div>
                                 
                             </div>
@@ -97,16 +97,15 @@
     <div class="divCuentas">
         <form action="" method="post">
             {% csrf_token %}
-            {% if form.errors.email %}
-                <span class="helptext">{{ form.errors.email }}</span>
-            {% endif %}
-            
                <ul class="custom-tab-group">
                        <li class="custom-tab active" id="tituloReg"><a href="#custom-signup">Regístrate</a></li>
-                       <li class="custom-tab " id="tituloIni"><a href="{% url 'login' %}">Iniciar Sesión</a></li>
+                       <li class="custom-tab " id="tituloIni"><a href="{% url 'iniSesion' %}">Iniciar Sesión</a></li>
                     </ul>
                      <div id="custom-formulario">
                           <h1>Regístrate</h1>
+                             {% if form.errors.email %}
+                                <span class="helptext">{{ form.errors.email }}</span>
+                            {% endif %}
                             <div class="custom-field-wrap">
                                 <input placeholder="Correo electronico*" type="email" name="email" required="" id="id_email" data-dashlane-rid="782dff1799e95e1d" data-kwimpalastatus="alive" data-kwimpalaid="1685974895644-0" data-form-type="email">
                             </div>

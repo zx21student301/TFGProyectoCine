@@ -1,0 +1,75 @@
+{% extends 'principal/administracion.html' %}
+{% block contenido %}
+
+    <div class="content">
+      <div class="listaDiv">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <table id="miTabla">
+                        <input type="hidden" name="csrfmiddlewaretoken" value="T0kMvRcaFCqOc6zd2isOcI3YRVyLA2mqhiMPKMi2iPomDwdLdMTxU35rjFkub1Sq">
+                            <tbody><tr>
+            <th><label for="id_titulo">Titulo:</label></th>
+            <td>
+              <input type="text" name="titulo" maxlength="700" required="" id="id_titulo" data-dashlane-rid="2812f8bb0e587013" data-form-type="other">
+            </td>
+          </tr>
+          <tr>
+            <th><label for="id_imagen">Imagen:</label></th>
+            <td>
+              <input type="file" name="imagen" accept="image/*" required="" id="id_imagen" data-dashlane-rid="c8a04c93bac3eaf8" data-form-type="other">
+            </td>
+          </tr>
+          <tr>
+            <th><label for="id_genero">Genero:</label></th>
+            <td>
+              <input type="text" name="genero" maxlength="255" required="" id="id_genero" data-dashlane-rid="9fe0ea5f0b7f4b00" data-form-type="other">
+            </td>
+          </tr>
+          <tr>
+            <th><label for="id_duracion">Duracion:</label></th>
+            <td>
+              <input type="text" name="duracion" maxlength="255" required="" id="id_duracion" data-dashlane-rid="a98faca1441c35d7" data-form-type="other">
+            </td>
+          </tr>
+          <tr>
+            <th><label for="id_sinopsis">Sinopsis:</label></th>
+            <td>
+              <textarea name="sinopsis" cols="40" rows="10" required="" id="id_sinopsis" data-dashlane-rid="1ed535909ea40c83" data-form-type="other"></textarea>
+            </td>
+          </tr>
+          <tr>
+            <th><label for="id_director">Director:</label></th>
+            <td>
+              <input type="text" name="director" maxlength="255" required="" id="id_director" data-dashlane-rid="750210334691fe5a" data-form-type="other">
+            </td>
+          </tr>
+          <tr>
+            <th><label for="id_fechaLanzamiento">Fecha de lanzamiento:</label></th>
+            <td>
+              <input type="text" name="fechaLanzamiento" maxlength="700" required="" id="id_fechaLanzamiento" data-dashlane-rid="f39f3e96d6d16696" data-form-type="other">
+            </td>
+          </tr>
+          <tr>
+            <th><label for="id_clasificacionEdad">Clasificacion edad:</label></th>
+            <td>
+              <input type="text" name="clasificacionEdad" maxlength="255" required="" id="id_clasificacionEdad" data-dashlane-rid="4a1a17919f475996" data-form-type="other">
+            </td>
+          </tr>
+          <tr>
+            <th><label for="id_valoracion">Valoracion:</label></th>
+            <td>
+              <input type="number" name="valoracion" step="any" required="" id="id_valoracion" data-dashlane-rid="d4cd8f981b426335" data-form-type="other">
+            </td>
+          </tr>
+          <tr>
+            <th><label for="id_disponible">Disponible:</label></th>
+            <td>
+              <input type="checkbox" name="disponible" id="id_disponible" checked="" data-dashlane-rid="cbdfde38c8523a41" data-form-type="other">
+            </td>
+          </tr>
+                </table>
+                <input type="submit" value="Crear Pelicula" id="btnCrearFin">
+            </form>
+        </div>
+    </div>
+{% endblock %}

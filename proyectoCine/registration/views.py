@@ -6,8 +6,10 @@ from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from .forms import RegistrationForm
 
+from django.contrib import messages
 
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import AuthenticationForm
 
 
 def registro(request):
@@ -17,25 +19,27 @@ def registro(request):
             user = form.save()
             login(request, user)
             # Redirigir a la página de inicio después del registro
-            return redirect('index')
+            return redirect('listado')
     else:
         form = RegistrationForm()
     return render(request, 'registration/registro.html', {'form': form})
 
 
 def iniciar_sesion(request):
-    if request.method == 'POST':
-        email = request.POST['email']
-        password = request.POST['password']
-        user = authenticate(request, email=email, password=password)
-        if user is not None:
-            # El usuario se autenticó correctamente
-            login(request, user)
-            # Redirigir a la página deseada después del inicio de sesión
-            return redirect('index')
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                    login(request, user)
+                    if user.is_superuser:
+                        return redirect("administracion")
+                    return redirect("listado")
+            else:
+                messages.error(request,"Nombre de usuario o contraseña invalida.")
         else:
-            # El usuario no se autenticó correctamente
-            error_message = "Correo electrónico o contraseña incorrectos"
-            return render(request, 'login.html', {'error_message': error_message})
-    else:
-        return render(request, 'login.html')
+            messages.error(request,"Nombre de usuario o contraseña invalida.")
+    form = AuthenticationForm()
+    return render(request=request, template_name="registration/login.html", context={"login_form":form})

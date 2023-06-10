@@ -1,0 +1,375 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: #333333;
+    padding: 20px;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+}
+
+.container {
+    display: flex;
+    height: 100%;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #f1f1f1;
+    padding: 20px;
+}
+
+.content {
+    flex: 1;
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+.menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+.menu li {
+    margin-bottom: 10px;
+}
+
+.menu li a {
+    display: block;
+    padding: 15px 20px;
+    background-color: #ffffff;
+    color: #333333;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.menu li a:hover {
+    background-color: #f1f1f1;
+}
+
+.logout-btn {
+    padding: 15px 30px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #0056b3;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.listaDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: -70px;
+}
+
+.botonAnadir {
+    background-color: #28a745; /* Verde más claro */
+    color: white;
+    font-size: 32px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px; /* Redondear bordes */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+  
+  .botonAnadir svg {
+    fill: white; /* Blanco */
+    margin-right: 10px;
+  }
+  
+  button{
+    border: 0px;
+  }
+
+  .listaDiv a{
+    text-decoration:none;
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+.divCuentas {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-40%, -50%);
+  
+    z-index: 100;
+    background: #252525;
+    padding: 40px;
+    width: 800px;
+    margin: 40px auto;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px 10px #3e3e3e;
+  }
+  
+  .custom-tab-group {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 40px 0;
+  }
+  
+  .custom-tab-group:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  .custom-tab-group li a {
+    display: block;
+    text-decoration: none;
+    padding: 15px;
+    background: rgba(160, 179, 176, 0.25);
+    color: #a0b3b0;
+    font-size: 20px;
+    float: left;
+    width: 50%;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.5s ease;
+  }
+  
+  .custom-tab-group li a:hover {
+    background: #626262;
+    color: #ffffff;
+  }
+  
+  .custom-tab-group .active a {
+    background: #626262;
+    color: #ffffff;
+  }
+  
+  .custom-tab-content>div:last-child {
+    display: none;
+  }
+  
+  .divCuentas h1 {
+    text-align: center;
+    color: #ffffff;
+    font-weight: 300;
+    margin: 0 0 40px;
+  }
+  
+  .divCuentas label {
+
+    color: rgba(255, 255, 255, 0.5);
+    transition: all 0.25s ease;
+    pointer-events: none;
+    font-size: 22px;
+  }
+  
+  .divCuentas label.active {
+    transform: translateY(50px);
+    left: 2px;
+    font-size: 14px;
+  }
+  
+  .divCuentas label.active .req {
+    opacity: 0;
+  }
+  
+  .divCuentas label.highlight {
+    color: #ffffff;
+  }
+  
+  .divCuentas input{
+    font-size: 22px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 5px 10px;
+    background: none;
+    background-image: none;
+    border: 1px solid #a0b3b0;
+    color: #ffffff;
+    border-radius: 0;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  
+  .divCuentas input:focus,
+  .divCuentas textarea:focus {
+    outline: 0;
+    border-color: #626262;
+  }
+  
+  .divCuentas textarea {
+    border: 2px solid #a0b3b0;
+    resize: vertical;
+  }
+  
+  .divCuentas .field-wrap {
+    position: relative;
+    margin-bottom: 40px;
+  }
+  
+  .divCuentas .top-row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  .divCuentas .top-row>div {
+    float: left;
+    width: 48%;
+    margin-right: 4%;
+  }
+  
+  .divCuentas .top-row>div:last-child {
+    margin: 0;
+  }
+  
+  .divCuentas .button {
+    border: 0;
+    outline: none;
+    border-radius: 0;
+    padding: 15px 0;
+    font-size: 2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background: #28a745;
+    color: #ffffff;
+    transition: all.5s ease;
+  }
+  
+  .divCuentas .button:hover,
+  .divCuentas .button:focus {
+    background: #1e7c34;
+  }
+  
+  .divCuentas .button-block {
+    display: block;
+    width: 100%;
+  }
+  
+  .divCuentas .forgot {
+    margin-top: -20px;
+    text-align: right;
+  }
+  
+  .forgot a{
+    color: white;
+  }
+
+  .divCuentas textarea{
+    font-size: 22px;
+    display: block;
+    width: 100%;
+    height: 100px;
+    padding: 0px 10px;
+    background: none;
+    background-image: none;
+    border: 1px solid #a0b3b0;
+    color: #ffffff;
+    border-radius: 0;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+
+  
+.file-select {
+  position: relative;
+  display: inline-block;
+}
+
+.file-select::before {
+  font-size: 22px;
+  display: block;
+  width: 810px;
+  height: 100%;
+  background: none;
+  background-image: none;
+  border: 1px solid #a0b3b0;
+  color: #7a7a7a;
+  border-radius: 0;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  border-radius: 3px;
+  content: 'Seleccionar'; /* testo por defecto */
+  position: absolute;
+  padding-left: 10px;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.file-select input[type="file"] {
+  opacity: 0;
+  width: 800px;
+  height: 32px;
+  display: inline-block;
+}
+
+
