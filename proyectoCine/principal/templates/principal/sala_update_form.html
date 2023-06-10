@@ -1,0 +1,77 @@
+{% extends 'principal/administracion.html' %}
+
+{% block contenido %}
+<div class="content">
+    <div class="listaDiv">
+      <div class="divCuentas">
+        <form action="" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div id="custom-formulario">
+            <h1 id="tituloForm">Iniciar Sesión</h1>
+          </div>
+          <table id="miTabla">
+            <tbody>
+              <tr>
+                <th><label for="id_titulo">Titulo:</label></th>
+                <td>
+                  <input type="text" name="titulo" value="Fast and Furios" maxlength="700" required="" id="id_titulo" data-dashlane-rid="b292b441fd5f5ae0" data-form-type="other">
+                </td>
+              </tr>
+              <tr>
+                <th><label for="id_imagen">Imagen:</label></th>
+                <td>
+                  Actualmente: <a href="/media/peliculas/Garant%C3%ADa_Juvenil_David_Romero_Camacho_XRhUWcc.PNG">peliculas/Garantía_Juvenil_David_Romero_Camacho_XRhUWcc.PNG</a><br>
+                  Modificar:
+                  <input type="file" name="imagen" accept="image/*" id="id_imagen" data-dashlane-rid="2fbcb282ef367407" data-form-type="other">
+                </td>
+              </tr>
+              <tr>
+                <th><label for="id_genero">Genero:</label></th>
+                <td>
+                  <input type="text" name="genero" value="Carreras" maxlength="255" required="" id="id_genero" data-dashlane-rid="81e4cf841e5d8fbe" data-form-type="other">
+                </td>
+              </tr>
+              <tr>
+                <th><label for="id_duracion">Duracion:</label></th>
+                <td>
+                  <input type="text" name="duracion" value="2 h, 21min" maxlength="255" required="" id="id_duracion" data-dashlane-rid="4f0784afc11ba3e9" data-form-type="other">
+                </td>
+              </tr>
+              <tr>
+                <th><label for="id_sinopsis">Sinopsis:</label></th>
+                <td>
+                  <textarea name="sinopsis" cols="40" rows="10" required="" id="id_sinopsis" data-dashlane-rid="40a15a7ff66a8002" data-form-type="other">Va de coches 2</textarea>
+                </td>
+              </tr>
+              <tr>
+                <th><label for="id_director">Director:</label></th>
+                <td>
+                  <input type="text" name="director" value="Tarantino" maxlength="255" required="" id="id_director" data-dashlane-rid="1aa4203e83f6ad82" data-form-type="other">
+                </td>
+              </tr>
+              <tr>
+                <th><label for="id_fechaLanzamiento">Fecha de lanzamiento:</label></th>
+                <td>
+                  <input type="text" name="fechaLanzamiento" value="28/06/2032" maxlength="700" required="" id="id_fechaLanzamiento" data-dashlane-rid="280a520318392a7e" data-form-type="other">
+                </td>
+              </tr>
+              <tr>
+                <th><label for="id_clasificacionEdad">Clasificacion edad:</label></th>
+                <td>
+                  <input type="text" name="clasificacionEdad" value="32" maxlength="255" required="" id="id_clasificacionEdad" data-dashlane-rid="ef12be3cc5b3cd10" data-form-type="other">
+                </td>
+              </tr>
+              <tr>
+                <th><label for="id_disponible">Disponible:</label></th>
+                <td class="custom-checkbox">
+                  <input type="checkbox" name="disponible" id="id_disponible" checked="">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <input type="submit" class="button button-block" value="Modificar">
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endblock %}

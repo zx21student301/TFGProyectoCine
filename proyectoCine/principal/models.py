@@ -15,7 +15,7 @@ class Pelicula(models.Model):
     director = models.CharField(max_length=255, verbose_name='Director')
     fechaLanzamiento = models.CharField(max_length=700, verbose_name='Fecha de lanzamiento')
     clasificacionEdad = models.CharField(max_length=255, verbose_name='Clasificacion edad')
-    valoracion = models.FloatField(verbose_name='Valoracion')
+    valoracion = models.FloatField(verbose_name='Valoracion', null=True)
     disponible = models.BooleanField(default=True, verbose_name='Disponible')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creación')
 
@@ -29,7 +29,7 @@ class Pelicula(models.Model):
 
 
 class Sala(models.Model):
-    nombre = models.CharField(max_length=255, verbose_name='Capacidad maxima')
+    nombre = models.CharField(max_length=255, verbose_name='Nombre')
     capacidadMaxima = models.CharField(max_length=255, verbose_name='Capacidad maxima')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creación')
 

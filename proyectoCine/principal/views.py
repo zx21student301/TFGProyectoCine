@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login
 
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from .models import Pelicula
+from .models import *
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from django.urls import reverse_lazy
@@ -30,9 +30,55 @@ class PeliculaAdminListView(ListView):
     context_object_name = 'peliculas'
 
 class PeliculaCreatelView(CreateView):
-    print("Asd")
     model = Pelicula
     fields = ['titulo', 'imagen', 'genero', 'duracion', 'sinopsis', 'director', 'fechaLanzamiento', 'clasificacionEdad', 'disponible']
+    success_url = reverse_lazy('listadoPelisAdmin')
 
+class PeliculaUpdateView(UpdateView):
+    model = Pelicula
+    fields = ['titulo', 'imagen', 'genero', 'duracion', 'sinopsis', 'director', 'fechaLanzamiento', 'clasificacionEdad', 'disponible']
+    template_name_suffix='_update_form'
+    success_url = reverse_lazy('listadoPelisAdmin')
 
+class PeliculaDeleteView(DeleteView):
+    model = Pelicula
+    success_url = reverse_lazy('listadoPelisAdmin')
+
+class SalaAdminListView(ListView):
+    model = Sala
+    template_name = 'principal/administracionSalas.html'
+    context_object_name = 'salas'
+
+class SalaCreatelView(CreateView):
+    model = Sala
+    fields = ['nombre', 'capacidadMaxima']
+    success_url = reverse_lazy('listadoSalasAdmin')
+
+class SalaUpdateView(UpdateView):
+    model = Sala
+    fields = ['nombre', 'capacidadMaxima']
+    success_url = reverse_lazy('listadoSalasAdmin')
+
+class SalaDeleteView(DeleteView):
+    model = Sala
+    success_url = reverse_lazy('listadoSalasAdmin')
+
+class FuncionAdminListView(ListView):
+    model = Funcion
+    template_name = 'principal/administracionFunciones.html'
+    context_object_name = 'funciones'
+
+class FuncionCreatelView(CreateView):
+    model = Funcion
+    fields = ['fecha', 'fechaInicio', 'fechaFin', 'pelicula', 'sala']
+    success_url = reverse_lazy('listadoFuncionesAdmin')
+
+class FuncionUpdateView(UpdateView):
+    model = Funcion
+    fields = ['fecha', 'fechaInicio', 'fechaFin', 'pelicula', 'sala']
+    success_url = reverse_lazy('listadoFuncionesAdmin')
+
+class FuncionDeleteView(DeleteView):
+    model = Funcion
+    success_url = reverse_lazy('listadoFuncionesAdmin')
 
