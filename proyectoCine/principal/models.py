@@ -76,8 +76,8 @@ class Funcion(models.Model):
 #         return self.nombre
     
 class Entrada(models.Model):
-    precio = models.FloatField(verbose_name='Precio')
     usuario = models.ForeignKey(User, verbose_name='Usuario' , on_delete=models.CASCADE)
+    precio = models.FloatField(verbose_name='Precio')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creación')
 
     class Meta:
@@ -86,6 +86,7 @@ class Entrada(models.Model):
         ordering = ['-created']
 
 class Butaca(models.Model):
+    numero = models.IntegerField(verbose_name='Numero', default=0)
     estado = models.CharField(max_length=255, default='Disponible', verbose_name='Estado')
     funcion = models.ForeignKey(Funcion, on_delete=models.CASCADE, verbose_name='Funcion')
     entrada = models.ForeignKey(Entrada, on_delete=models.CASCADE, null=True, verbose_name='Entrada')

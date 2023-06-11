@@ -1,7 +1,7 @@
 {% extends 'principal/administracion.html' %}
 {% block contenido %}
 <div class="content">
-  <div class="listaDiv">
+  <div class="listaDiv" id="mostrarButacas">
     <a href="{% url 'crearFuncionesAdmin' %}">
       <button class="botonAnadir">
         <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="44.000000pt" height="44.000000pt" viewBox="0 0 1280.000000 1280.000000" preserveAspectRatio="xMidYMid meet">
@@ -16,6 +16,7 @@
     <table class="mostrarPeliculas">
       <thead>
         <tr>
+          <th class="bordeDerecho">Funcion id</th>
           <th class="bordeDerecho">Fecha</th>
           <th class="bordeDerecho">Hora Inicio</th>
           <th class="bordeDerecho">Hora Fin</th>
@@ -29,6 +30,7 @@
       <tbody>
         {% for funcion in funciones %}
           <tr>
+            <td>{{ funcion.id }}</td>
             <td>{{ funcion.fecha|date:"d/m/Y" }}</td>
             <td>{{ funcion.fechaInicio|date:"H:i" }}</td>
             <td>{{ funcion.fechaFin|date:"H:i" }}</td>

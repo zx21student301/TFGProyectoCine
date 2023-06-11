@@ -18,5 +18,7 @@ urlpatterns = [
     path('administracion/funciones/crear',  FuncionCreatelView.as_view() ,name='crearFuncionesAdmin'),
     path('modificarFuncion/<int:pk>', FuncionUpdateView.as_view(), name="modificarFuncion"),
     path('borrarFuncion/<int:pk>', FuncionDeleteView.as_view(), name="borrarFuncion"),
+    path('administracion/Butacas',  ButacaAdminListView.as_view() ,name='listadoButacasAdmin'),
+    path('modificarButaca/<int:pk>', ButacaUpdateView.as_view(), name="modificarButaca"),
 
 ]

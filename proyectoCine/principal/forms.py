@@ -1,11 +1,7 @@
 from django import forms
-from .models import *
+from .models import Butaca
 
-class PeliculasForm(forms.ModelForm):
+class ButacaForm(forms.ModelForm):
     class Meta:
-        model=Pelicula
-        fields = ['titulo', 'imagen', 'genero', 'duracion', 'sinopsis', 'director', 'fechaLanzamiento', 'clasificacionEdad', 'valoracion', 'disponible']
-        
-    
-
-
+        model = Butaca
+        exclude = ['campo_no_deseado']

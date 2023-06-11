@@ -1,13 +1,63 @@
 {% extends "principal/base.html" %}
+{% load static %}
+
+{% block destacadas %}
+
+<div class="col-md-4 contPeliculaPrincipal">
+    <a href="https://youtu.be/_1f2RLdxQfA" class="linkTrailerPrincipal">
+        <div class="divTrailer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" fill="#ffffff" />
+            </svg>
+        </div>
+    </a>
+    <a href="">
+        <img src="{% static 'principal/img/img1.jpeg' %}" class="imgPeliculaPrincipal" alt="">
+    </a>
+    <p class="tituloPeliculaPrincipal w-100 h-100 text-center">Super Mario Bros: La película</p>
+</div>
+<div class="col-md-4 contPeliculaPrincipal">
+    <a href="https://youtu.be/9SfnkovRye8" class="linkTrailerPrincipal">
+        <div class="divTrailer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" fill="#ffffff" />
+            </svg>
+        </div>
+    </a>
+    <a href="">
+        <img src="{% static 'principal/img/img2.jpeg' %}" class="imgPeliculaPrincipal" alt="">
+    </a>
+    <p class="tituloPeliculaPrincipal w-100 h-100 text-center">Guardianes de la Galaxia Vol.3</p>
+</div>
+<div class="col-md-4 contPeliculaPrincipal">
+    <a href="https://youtu.be/IWMC7FW81MQ" class="linkTrailerPrincipal">
+        <div class="divTrailer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" fill="#ffffff" />
+            </svg>
+        </div>
+    </a>
+    <a href="">
+        <img src="{% static 'principal/img/img3.jpeg' %}" class="imgPeliculaPrincipal" alt="">
+    </a>
+    <p class="tituloPeliculaPrincipal w-100 h-100 text-center">La sirenita</p>
+</div>
+</div>
+
+{% endblock %}
+
+
 {% block catalogo %}
 {% for p in pelicula_list %}
 <div class="col-md-3">
+    <a href="{% url  'detalle'  p.id %}">
     <div class="card w-100 h-100">
         <img class="card-img-top w-100 h-100" src="/media/{{ p.imagen }}" alt="{{ p.titulo }}">
         <div class="card-body">
-            <h5 class="card-title card-catalogo"><a href="{% url  'detalle'  p.id %}">{{ p.titulo }}</a></h5>
+            <h5 class="card-title card-catalogo">{{ p.titulo }}</h5>
         </div>
     </div>
+</a>
 </div>
 {% endfor %}
 {% endblock %}

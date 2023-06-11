@@ -5,7 +5,7 @@
     <div class="listaDiv">
         <form method="post" class="form-container">
             {% csrf_token %}
-            <p class="form-message">¿Estás seguro de que quieres borrar <strong>{{funcion.fechaInicio}}</strong>?</p>
+            <p class="form-message">¿Estás seguro de que quieres eliminar la funcion de <strong>{{funcion.pelicula}}</strong> <br>en la <strong>{{funcion.sala}}</strong> a las <strong>{{funcion.fechaInicio}}</strong>?</p>
             <div class="form-field">
                 {{ form }}
             </div>
