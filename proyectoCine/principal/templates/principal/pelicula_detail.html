@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block contenido %}
-    <div class="container cuerpo" style="margin-top: 5rem;">
+    <div class="container cuerpo cuerpoDetail" style="margin-top: 5rem;">
         <div class="card">
             <div class="row">
                 <div class="col-md-4">
@@ -30,25 +30,24 @@
                         <h5>{{fecha}}:</h5>
                             <ul>
                                 {% for funcion in funciones %}
-                                    <li>{{ funcion.fechaInicio|time  }} - {{ funcion.fechaFin|time  }}</li>
+                                    <li><a  {% if not request.user.is_authenticated %}
+                                        href="{% url 'iniSesion' %}"
+                                        {% else %}
+                                        href="{% url  'detalleFuncion'  funcion.id %}"
+                                        {% endif %} >
+                                        {{ funcion.fechaInicio|time  }} - {{ funcion.fechaFin|time  }}</a></li>
                                     <!-- Mostrar otros detalles de la función aquí -->
                                 {% endfor %}
                             </ul>
 
                         {% endfor %}
                         </div>
-                    </div>
-                    {% if pelicula.disponible != 0 %}
-                        <div class="btn-volver">
-                            <a href="{% url 'listado' %}" class="btn btn-success float-end"><i class="fas fa-arrow-left"></i>
-                                Comprar entradas</a>
+                        <div class="btn-volver mgb-4">
+                            <a href="{% url 'listado' %}" class="btn btn-dark float-end"><i class="fas fa-arrow-left"></i>
+                                Volver</a>
                         </div>
-                    {% endif %}
+                    </div>
                 </div>
-            </div>
-            <div class="btn-volver">
-                <a href="{% url 'listado' %}" class="btn btn-dark float-end"><i class="fas fa-arrow-left"></i>
-                    Volver</a>
             </div>
         </div>
     </div>

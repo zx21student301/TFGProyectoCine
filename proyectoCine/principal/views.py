@@ -89,7 +89,7 @@ class FuncionCreatelView(CreateView):
         funcion = self.object
 
         # Crea las 40 butacas asignadas a la función
-        for numero in range(1, 41):
+        for numero in range(1, 81):
             Butaca.objects.create(numero=numero, estado='Disponible', funcion=funcion)
 
         return response
@@ -119,10 +119,6 @@ class ButacaUpdateView(UpdateView):
     template_name_suffix='_update_form'
     success_url = reverse_lazy('listadoButacasAdmin')
 
-    def form_valid(self, form):
-        if form.cleaned_data['foreing_key'] == '':
-            form.cleaned_data['foreing_key'] = None
-        return super().form_valid(form)
 
 
 
@@ -131,3 +127,11 @@ def crear_butacas(sender, instance, created, **kwargs):
         num_butacas = 40  # Número de butacas a crear
         for numero in range(1, num_butacas + 1):
             Butaca.objects.create(funcion=instance, numero=numero)
+
+class FuncionDetailView(DetailView):
+    model = Funcion
+
+    def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            context['butacas'] = reversed(self.object.butaca_set.all())
+            return context
