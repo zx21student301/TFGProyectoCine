@@ -1,0 +1,34 @@
+{% extends 'principal/administracion.html' %}
+{% block contenido %}
+<div class="content" >
+  <div class="listaDiv" id="mostrarButacas">
+    <table class="mostrarPeliculas" >
+      <thead>
+        <tr>
+          <th class="bordeDerecho">Numero</th>
+          <th class="bordeDerecho">Estado</th>
+          <th class="bordeDerecho">Funcion id</th>
+          <th class="bordeDerecho">Entrada</th>
+          <th >Modificar</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for butaca in butacas %}
+          <tr>
+            <td>{{ butaca.numero }}</td>
+            <td>{{ butaca.estado }}</td>
+            <td>{{ butaca.funcion.id }}</td>
+            <td>{% if butaca.entrada is null %}
+             {{ butaca.entrada}}
+            {% else %}
+              {{ butaca.entrada.id}}
+            {% endif %}
+            </td>
+            <td><a href="{% url 'modificarButaca' butaca.id %}" >Modificar</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

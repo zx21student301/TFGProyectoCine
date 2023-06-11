@@ -1,8 +1,8 @@
 {% extends 'principal/administracion.html' %}
 {% block contenido %}
 <div class="content">
-  <div class="listaDiv">
-    <a href="{% url 'crearPelisAdmin' %}">
+  <div class="listaDiv" id="mostrarButacas">
+    <a href="{% url 'crearFuncionesAdmin' %}">
       <button class="botonAnadir">
         <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="44.000000pt" height="44.000000pt" viewBox="0 0 1280.000000 1280.000000" preserveAspectRatio="xMidYMid meet">
           <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)" stroke="#ffffff">
@@ -10,39 +10,38 @@
             <path d="M5715 9361 c-48 -22 -79 -54 -100 -103 -13 -33 -15 -158 -15 -1048 l0 -1010 -1012 0 c-963 0 -1015 -1 -1053 -19 -48 -22 -79 -54 -100 -103 -13 -32 -15 -122 -15 -678 0 -556 2 -646 15 -678 21 -49 52 -81 100 -103 38 -18 90 -19 1053 -19 l1012 0 0 -1012 c0 -963 1 -1015 19 -1053 22 -48 54 -79 103 -100 32 -13 122 -15 680 -15 602 0 646 2 683 19 50 22 91 69 105 119 6 24 10 381 10 1040 l0 1002 1010 0 c890 0 1015 2 1048 15 49 21 81 52 103 100 17 38 19 79 19 685 0 604 -2 648 -19 685 -22 50 -69 91 -119 105 -24 6 -381 10 -1039 10 l-1003 0 0 1003 c0 658 -4 1015 -10 1039 -14 50 -55 97 -105 119 -37 17 -81 19 -685 19 -606 0 -647 -2 -685 -19z"/>
           </g>
         </svg>
-        Añadir película
+        Añadir Funcion
       </button>
     </a>
     <table class="mostrarPeliculas">
       <thead>
         <tr>
-          <th class="bordeDerecho">Título</th>
-          <th class="bordeDerecho">Género</th>
-          <th class="bordeDerecho">duracion</th>
-          <th class="bordeDerecho">Estreno</th>
-          <th class="bordeDerecho">Edad</th>
-          <th class="bordeDerecho">Valoracion</th>
-          <th class="bordeDerecho">Disponible</th>
+          <th class="bordeDerecho">Funcion id</th>
+          <th class="bordeDerecho">Fecha</th>
+          <th class="bordeDerecho">Hora Inicio</th>
+          <th class="bordeDerecho">Hora Fin</th>
+          <th class="bordeDerecho">Pelicula</th>
+          <th class="bordeDerecho">Sala</th>
           <th class="bordeDerecho">Modificar</th>
-          <th class="bordeDerecho">Borrar</th>
+          <th >Borrar</th>
           <!-- Agrega más encabezados de columnas según tus necesidades -->
         </tr>
       </thead>
       <tbody>
-        {% for pelicula in peliculas %}
+        {% for funcion in funciones %}
           <tr>
-            <td>{{ pelicula.titulo }}</td>
-            <td>{{ pelicula.genero }}</td>
-            <td>{{ pelicula.duracion }}</td>
-            <td>{{ pelicula.fechaLanzamiento }}</td>
-            <td>{{ pelicula.clasificacionEdad }}</td>
-            <td>{{ pelicula.valoracion }}</td>
-            <td>{{ pelicula.disponible }}</td>
-            <td><a href="{% url 'modificarPelicula' pelicula.id %}" class="btn btn-outline-warning">Modificar</a></td>
-            <td><a href="{% url 'borrarPelicula' pelicula.id %}" class="btn btn-outline-warning">Eliminar</a></td>
+            <td>{{ funcion.id }}</td>
+            <td>{{ funcion.fecha|date:"d/m/Y" }}</td>
+            <td>{{ funcion.fechaInicio|date:"H:i" }}</td>
+            <td>{{ funcion.fechaFin|date:"H:i" }}</td>
+            <td>{{ funcion.pelicula }}</td>
+            <td>{{ funcion.sala }}</td>
+            <td><a href="{% url 'modificarFuncion' funcion.id %}" >Modificar</a></td>
+            <td><a href="{% url 'borrarFuncion' funcion.id %}" >Eliminar</a></td>
           </tr>
         {% endfor %}
       </tbody>
+      
     </table>
   </div>
 </div>

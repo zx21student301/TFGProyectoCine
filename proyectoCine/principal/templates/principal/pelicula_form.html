@@ -1,50 +1,95 @@
 {% extends 'principal/administracion.html' %}
 {% block contenido %}
 
-    <div class="content">
-      <div class="listaDiv">
-            <div class="divCuentas">
-                <form action="" method="post">
-                    {% csrf_token %}
-                             <div id="custom-formulario">
-                                    <h1>Iniciar Sesión</h1>
-                                    
-                <input placeholder="Titulo" type="text" name="titulo" maxlength="700" required="" id="id_titulo" data-dashlane-rid="2812f8bb0e587013" data-form-type="other">
-              
-            </div>
-            <table>
-            <div class="custom-field-wrap file-select" id="src-file1">
-                <input placeholder="Selecciona una imagen" type="file" name="imagen" accept="image/*" required="" id="id_imagen" data-dashlane-rid="c8a04c93bac3eaf8" data-form-type="other">
-            </div>
-            <div class="custom-field-wrap"> 
-                <input placeholder="Genero" type="text" name="genero" maxlength="255" required="" id="id_genero" data-dashlane-rid="9fe0ea5f0b7f4b00" data-form-type="other">
-            </div>
-            <div class="custom-field-wrap">
-                <input placeholder="Duracion" type="text" name="duracion" maxlength="255" required="" id="id_duracion" data-dashlane-rid="a98faca1441c35d7" data-form-type="other">
-            </div>
-            <div class="custom-field-wrap">
-                <textarea placeholder="Sinopsis" name="sinopsis" cols="40" rows="10" required="" id="id_sinopsis" data-dashlane-rid="1ed535909ea40c83" data-form-type="other"></textarea>
-            </div>
-            <div class="custom-field-wrap">
-                <input placeholder="Director" type="text" name="director" maxlength="255" required="" id="id_director" data-dashlane-rid="750210334691fe5a" data-form-type="other">
-            </div>
-            <div class="custom-field-wrap">
-                <input placeholder="Fecha de lanzamiento" type="text" name="fechaLanzamiento" maxlength="700" required="" id="id_fechaLanzamiento" data-dashlane-rid="f39f3e96d6d16696" data-form-type="other">
-            </div>
-            <div class="custom-field-wrap">
-
-                <input placeholder="Clasificacion Edad" type="text" name="clasificacionEdad" maxlength="255" required="" id="id_clasificacionEdad" data-dashlane-rid="4a1a17919f475996" data-form-type="other">
-            </div>
-            <div class="custom-field-wrap">
-                <p>Disponible
-                <input value="Disponible" type="checkbox" name="disponible" id="id_disponible" checked="" data-dashlane-rid="cbdfde38c8523a41" data-form-type="other">
-            </p>
-            </div>
-            <input type="submit" class="button button-block" value="Añadir">
-        </div>
-
-                </form>
-            </div> 
-        </div>
+<div class="content">
+    <div class="listaDiv">
+      <div class="divCuentas">
+        <form action="" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div id="custom-formulario">
+            <h1 id="tituloForm">Iniciar Sesión</h1>
+          </div>
+          <table id="miTabla">
+            <tbody>
+              <tr>
+                <th>
+                  <label for="id_titulo">Titulo:</label>
+                </th>
+                <td>
+                  <input type="text" name="titulo" maxlength="700" required="" id="id_titulo" data-dashlane-rid="90cfee16c52e4f68" data-form-type="other">
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label for="id_imagen">Imagen:</label>
+                </th>
+                <td>
+                  <input type="file" name="imagen" accept="image/*" required="" id="id_imagen" data-dashlane-rid="5219d6cd77201046" data-form-type="other">
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label for="id_genero">Genero:</label>
+                </th>
+                <td>
+                  <input type="text" name="genero" maxlength="255" required="" id="id_genero" data-dashlane-rid="1351d1341a98dee9" data-form-type="other">
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label for="id_duracion">Duracion:</label>
+                </th>
+                <td>
+                  <input type="text" name="duracion" maxlength="255" required="" id="id_duracion" data-dashlane-rid="b7b6cad2e13f7362" data-form-type="other">
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label for="id_sinopsis">Sinopsis:</label>
+                </th>
+                <td>
+                  <textarea name="sinopsis" cols="40" rows="10" required="" id="id_sinopsis" data-dashlane-rid="49f2e0d3e565e44c" data-form-type="other" data-dl-input-translation="true"></textarea>
+                  <deepl-inline-translate style="z-index: 1999999999;"></deepl-inline-translate>
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label for="id_director">Director:</label>
+                </th>
+                <td>
+                  <input type="text" name="director" maxlength="255" required="" id="id_director" data-dashlane-rid="21e9f7e42dd20fc6" data-form-type="other">
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label for="id_fechaLanzamiento">Fecha de lanzamiento:</label>
+                </th>
+                <td>
+                  <input type="text" name="fechaLanzamiento" maxlength="700" required="" id="id_fechaLanzamiento" data-dashlane-rid="ae4fb7f98dc211a0" data-form-type="other">
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label for="id_clasificacionEdad">Clasificacion edad:</label>
+                </th>
+                <td>
+                  <input type="text" name="clasificacionEdad" maxlength="255" required="" id="id_clasificacionEdad" data-dashlane-rid="1be0ae69c0bd92f6" data-form-type="other">
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label for="id_disponible">Disponible:</label>
+                </th>
+                <td class="custom-checkbox">
+                  <input type="checkbox" name="disponible" id="id_disponible" checked="">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <input type="submit" class="button button-block" value="Añadir">
+        </form>
+      </div>
     </div>
+  </div>
+  
 {% endblock %}

@@ -411,3 +411,57 @@ a:hover {
 .forgot a{
   color: white;
 }
+
+.divFunciones, .divFunciones li{
+
+  color: black;
+}
+
+.divFunciones {
+margin-left: 20px;
+}
+
+.divFunciones ul{
+  display: inline-flex;
+
+}
+
+.divFunciones li{
+  background-color: #28a745;
+  color: white;
+  list-style-type: none;
+  margin-right: 20px;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 16px;
+  transition: background-color 0.5s;
+}
+
+.divFunciones li:hover{
+  background-color: #0d8b6e;
+}
+
+.divFunciones a{
+  width: fit-content;
+  height: fit-content;
+  color: white;
+}
+
+.cuerpoDetail{
+  margin-bottom: 139px;
+}
+
+#footDetail{
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
+
+.funcionDetail{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}

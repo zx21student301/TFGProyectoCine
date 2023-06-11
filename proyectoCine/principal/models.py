@@ -15,7 +15,7 @@ class Pelicula(models.Model):
     director = models.CharField(max_length=255, verbose_name='Director')
     fechaLanzamiento = models.CharField(max_length=700, verbose_name='Fecha de lanzamiento')
     clasificacionEdad = models.CharField(max_length=255, verbose_name='Clasificacion edad')
-    valoracion = models.FloatField(verbose_name='Valoracion')
+    valoracion = models.FloatField(verbose_name='Valoracion', null=True)
     disponible = models.BooleanField(default=True, verbose_name='Disponible')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creación')
 
@@ -29,7 +29,7 @@ class Pelicula(models.Model):
 
 
 class Sala(models.Model):
-    nombre = models.CharField(max_length=255, verbose_name='Capacidad maxima')
+    nombre = models.CharField(max_length=255, verbose_name='Nombre')
     capacidadMaxima = models.CharField(max_length=255, verbose_name='Capacidad maxima')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creación')
 
@@ -76,8 +76,8 @@ class Funcion(models.Model):
 #         return self.nombre
     
 class Entrada(models.Model):
-    precio = models.FloatField(verbose_name='Precio')
     usuario = models.ForeignKey(User, verbose_name='Usuario' , on_delete=models.CASCADE)
+    precio = models.FloatField(verbose_name='Precio')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creación')
 
     class Meta:
@@ -86,6 +86,7 @@ class Entrada(models.Model):
         ordering = ['-created']
 
 class Butaca(models.Model):
+    numero = models.IntegerField(verbose_name='Numero', default=0)
     estado = models.CharField(max_length=255, default='Disponible', verbose_name='Estado')
     funcion = models.ForeignKey(Funcion, on_delete=models.CASCADE, verbose_name='Funcion')
     entrada = models.ForeignKey(Entrada, on_delete=models.CASCADE, null=True, verbose_name='Entrada')

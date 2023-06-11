@@ -104,6 +104,8 @@ h1 {
     justify-content: space-between;
     align-items: center;
     margin-left: -70px;
+    position: absolute;
+    top:170px;
 }
 
 .botonAnadir {
@@ -159,7 +161,7 @@ h1 {
     position: fixed;
     left: 50%;
     top: 50%;
-    transform: translate(-40%, -50%);
+    transform: translate(-40%, -47%);
   
     z-index: 100;
     background: #252525;
@@ -334,42 +336,120 @@ h1 {
   }
 
 
+#custom-formulario {
+  display: flex; 
+  justify-content: center;
+}
+
+th{
+  width: 30%;
+  text-align: left;
+  vertical-align: top;
+}
+
+td{
+  width: 70%;
+}
+
+    /* Estilos personalizados para el checkbox */
+  .custom-checkbox input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #999;
+    border-radius: 4px;
+    vertical-align: middle;
+    position: relative;
+  }
+
+  /* Estilos del símbolo dentro del checkbox cuando está marcado */
+  .custom-checkbox input[type="checkbox"]:checked::before {
+    content: "\2716"; /* Símbolo de "x" Unicode */
+    color: #999;
+    display: block;
+    text-align: center;
+    line-height: 20px;
+    font-size: 16px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+
+  .mostrarPeliculas{
+    margin: 50px 0px;
+    font-size: 28px;
+  }
+
+  .mostrarPeliculas {
+    border-collapse: collapse;
+  }
   
-.file-select {
-  position: relative;
-  display: inline-block;
-}
+  .mostrarPeliculas th,
+  .mostrarPeliculas td {
+    padding: 16px 10px;
+    text-align: center;
+    border: 2px solid #ccc;
+    width: 150px;
+  }
+  
+  .mostrarPeliculas th {
+    background-color: #333333;
+    color: #ffffff;
+    border: 2px solid #333333;
 
-.file-select::before {
-  font-size: 22px;
-  display: block;
-  width: 810px;
-  height: 100%;
-  background: none;
-  background-image: none;
-  border: 1px solid #a0b3b0;
-  color: #7a7a7a;
-  border-radius: 0;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
 
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  border-radius: 3px;
-  content: 'Seleccionar'; /* testo por defecto */
-  position: absolute;
-  padding-left: 10px;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-}
+  
+  .mostrarPeliculas tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .mostrarPeliculas tr:hover {
+    background-color: #eaeaea;
+  }
 
-.file-select input[type="file"] {
-  opacity: 0;
-  width: 800px;
-  height: 32px;
-  display: inline-block;
-}
+  .mostrarPeliculas .bordeDerecho{
+    border-right: solid 2px #ccc;
+  }
+
+   .form-container {
+        text-align: center;
+    }
+
+    .form-message {
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+
+    .form-field {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .form-submit {
+        padding: 15px 30px;
+        font-size: 32px;
+        color: #FFFFFF;
+        background-color: #dc3545;
+        border: none;
+        border-radius: 10px;
+    }
 
 
+    #miTabla, #miTabla tbody{
+      width: 100%;
+    }
+
+
+    #miTabla td{
+      color: white;
+    }
+
+    #miTabla a{
+      color: white;
+      text-decoration: underline;
+    }
