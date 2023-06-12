@@ -3,53 +3,107 @@
 {% load static %}
 
 {% block contenido %}
-    <div class="container cuerpo cuerpoDetail" style="margin-top: 5rem;">
-        <div class="card">
-            <div class="row">
-                <div class="col-md-4">
-                    <img src="/media/{{ pelicula.imagen }}" alt="{{ p.titulo }}" class="card-img w-100 h-100" >
+<div class="container cuerpo cuerpoDetail" style="margin-top: 5rem;">
+    <div class="card">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="/media/{{ pelicula.imagen }}" alt="{{ p.titulo }}" class="card-img w-100 h-100">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title" style="color:black">{{pelicula.titulo}}</h5>
+                    <p class="card-text" style="color:black"><u>Sinopsis:</u> {{pelicula.sinopsis}}</p>
+                    <ul class="list-group">
+                        <li class="list-group-item">Director: {{pelicula.director}}</li>
+                        <li class="list-group-item">Género: {{pelicula.genero}}</li>
+                        <li class="list-group-item">Duración: {{pelicula.duracion}}</li>
+                        <li class="list-group-item">Fecha de estreno: {{pelicula.fechaLanzamiento}}</li>
+                        <li class="list-group-item">Calificación de edades: {{pelicula.clasificacionEdad}}</li>
+                        <li class="list-group-item">Valoración media: {{pelicula.valoracion}}</li>
+                    </ul>
                 </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title" style="color:black">{{pelicula.titulo}}</h5>
-                        <p class="card-text" style="color:black"><u>Sinopsis:</u> {{pelicula.sinopsis}}</p>
-                        <ul class="list-group">
-                            <li class="list-group-item">Director: {{pelicula.director}}</li>
-                            <li class="list-group-item">Género: {{pelicula.genero}}</li>
-                            <li class="list-group-item">Duración: {{pelicula.duracion}}</li>
-                            <li class="list-group-item">Fecha de estreno: {{pelicula.fechaLanzamiento}}</li>
-                            <li class="list-group-item">Calificación de edades: {{pelicula.clasificacionEdad}}</li>
-                            <li class="list-group-item">Valoración media: {{pelicula.valoracion}}</li>
-                        </ul>
-                    </div>
-                    <div class="divFunciones">
-                        <div>
+                <div class="divFunciones">
+                    <div>
                         {% regroup funciones by fechaInicio.date as funciones_by_fecha %}
 
                         {% for fecha, funciones in funciones_by_fecha %}
                         <h5>{{fecha}}:</h5>
-                            <ul>
-                                {% for funcion in funciones %}
-                                    <li><a  {% if not request.user.is_authenticated %}
-                                        href="{% url 'iniSesion' %}"
-                                        {% else %}
-                                        href="{% url  'detalleFuncion'  funcion.id %}"
-                                        {% endif %} >
-                                        {{ funcion.fechaInicio|time  }} - {{ funcion.fechaFin|time  }}</a></li>
-                                    <!-- Mostrar otros detalles de la función aquí -->
-                                {% endfor %}
-                            </ul>
+                        <ul>
+                            {% for funcion in funciones %}
+                            <li><a {% if not request.user.is_authenticated %} href="{% url 'iniSesion' %}" {% else %}
+                                    href="{% url  'detalleFuncion'  funcion.id %}" {% endif %}>
+                                    {{ funcion.fechaInicio|time }} - {{ funcion.fechaFin|time }}</a></li>
+                            <!-- Mostrar otros detalles de la función aquí -->
+                            {% endfor %}
+                        </ul>
 
                         {% endfor %}
-                        </div>
-                        <div class="btn-volver mgb-4">
-                            <a href="{% url 'listado' %}" class="btn btn-dark float-end"><i class="fas fa-arrow-left"></i>
-                                Volver</a>
-                        </div>
+                    </div>
+                    <div class="btn-volver mgb-4">
+                        <a href="{% url 'listado' %}" class="btn btn-dark float-end">
+                            Volver</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="container cuerpo cuerpoComentarios" style="margin-top: 2rem;">
+        <div class="card">
+            <div class="card-header" style="color:black">
+                <h3>Comentarios<a href="{% url 'listado' %}" class="btn btn-primary float-end" data-bs-toggle="modal"
+                        data-bs-target="#crearModal">
+                    Añadir comentario</a></h3>
+            </div>
+            <div class="card-body">
+                <ul class="comment-list">
+                    {% for c in comentarios %}
+                    {% if c.pelicula_id == pelicula.id %}
+                    <li class="comment">
+                        {% for u in users %}
+                        {% if c.usuario_id == u.id %}
+                        <div class="comment-author" style="color:black">{{u.username}}</div>
+                        {% endif %}
+                        {% endfor %}
+                        <div class="comment-text" style="color:black">{{c.comentario}}</div>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal crear comentario-->
+<div class="modal fade" id="crearModal" tabindex="-1" aria-labelledby="crearModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="crearModalLabel">Crear Comentario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulario para crear un elemento -->
+                <form method="POST" action="{% url 'crear_comentario' %}">
+                    {% csrf_token %}
+                    {% if user.is_authenticated %}
+                    <input type="hidden" name="usuario_id" value="{{user.id}}">
+                    {% endif %}
+                    <input type="hidden" name="pelicula_id" value="{{pelicula.id}}">
+                    <div class="mb-3">
+                        <label for="nombre" style="color:black">Valoración</label>
+                        <input type="range" id="barra" name="puntuacion" min="0" max="100" step="1">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Comentario" style="color:black">Comentario</label>
+                        <textarea class="form-control" id="Comentario" name="Comentario"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Crear</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}
