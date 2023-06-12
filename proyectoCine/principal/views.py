@@ -22,9 +22,12 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 
 # Create your views here.
+
+
 class PeliculaListView(ListView):
     model = Pelicula
-    
+
+
 class PeliculaDetailView(DetailView):
     model = Pelicula
 
@@ -35,54 +38,67 @@ class PeliculaDetailView(DetailView):
         context['funciones'] = funciones
         return context
 
+
 def administracion(request):
     template = loader.get_template("principal/administracion.html")
     return HttpResponse(template.render())
+
 
 class PeliculaAdminListView(ListView):
     model = Pelicula
     template_name = 'principal/administracionPeliculas.html'
     context_object_name = 'peliculas'
 
+
 class PeliculaCreatelView(CreateView):
     model = Pelicula
-    fields = ['titulo', 'imagen', 'genero', 'duracion', 'sinopsis', 'director', 'fechaLanzamiento', 'clasificacionEdad', 'disponible']
+    fields = ['titulo', 'imagen', 'genero', 'duracion', 'sinopsis',
+              'director', 'fechaLanzamiento', 'clasificacionEdad', 'disponible']
     success_url = reverse_lazy('listadoPelisAdmin')
+
 
 class PeliculaUpdateView(UpdateView):
     model = Pelicula
-    fields = ['titulo', 'imagen', 'genero', 'duracion', 'sinopsis', 'director', 'fechaLanzamiento', 'clasificacionEdad', 'disponible']
-    template_name_suffix='_update_form'
+    fields = ['titulo', 'imagen', 'genero', 'duracion', 'sinopsis',
+              'director', 'fechaLanzamiento', 'clasificacionEdad', 'disponible']
+    template_name_suffix = '_update_form'
     success_url = reverse_lazy('listadoPelisAdmin')
+
 
 class PeliculaDeleteView(DeleteView):
     model = Pelicula
     success_url = reverse_lazy('listadoPelisAdmin')
+
 
 class SalaAdminListView(ListView):
     model = Sala
     template_name = 'principal/administracionSalas.html'
     context_object_name = 'salas'
 
+
 class SalaCreatelView(CreateView):
     model = Sala
     fields = ['nombre', 'capacidadMaxima']
     success_url = reverse_lazy('listadoSalasAdmin')
 
+
 class SalaUpdateView(UpdateView):
     model = Sala
-    template_name_suffix='_update_form'
+    template_name_suffix = '_update_form'
     fields = ['nombre', 'capacidadMaxima']
     success_url = reverse_lazy('listadoSalasAdmin')
+
 
 class SalaDeleteView(DeleteView):
     model = Sala
     success_url = reverse_lazy('listadoSalasAdmin')
 
+
 class FuncionAdminListView(ListView):
     model = Funcion
     template_name = 'principal/administracionFunciones.html'
     context_object_name = 'funciones'
+
 
 class FuncionCreatelView(CreateView):
     model = Funcion
@@ -97,16 +113,18 @@ class FuncionCreatelView(CreateView):
 
         # Crea las 40 butacas asignadas a la función
         for numero in range(1, 81):
-            Butaca.objects.create(numero=numero, estado='Disponible', funcion=funcion)
+            Butaca.objects.create(
+                numero=numero, estado='Disponible', funcion=funcion)
 
         return response
 
 
 class FuncionUpdateView(UpdateView):
     model = Funcion
-    template_name_suffix='_update_form'
+    template_name_suffix = '_update_form'
     fields = ['fecha', 'fechaInicio', 'fechaFin', 'pelicula', 'sala']
     success_url = reverse_lazy('listadoFuncionesAdmin')
+
 
 class FuncionDeleteView(DeleteView):
     model = Funcion
@@ -123,10 +141,8 @@ class ButacaAdminListView(ListView):
 class ButacaUpdateView(UpdateView):
     model = Butaca
     fields = ['estado', 'entrada']
-    template_name_suffix='_update_form'
+    template_name_suffix = '_update_form'
     success_url = reverse_lazy('listadoButacasAdmin')
-
-
 
 
 def crear_butacas(sender, instance, created, **kwargs):
@@ -135,13 +151,15 @@ def crear_butacas(sender, instance, created, **kwargs):
         for numero in range(1, num_butacas + 1):
             Butaca.objects.create(funcion=instance, numero=numero)
 
+
 class FuncionDetailView(DetailView):
     model = Funcion
 
     def get_context_data(self, **kwargs):
-            context = super().get_context_data(**kwargs)
-            context['butacas'] = reversed(self.object.butaca_set.all())
-            return context
+        context = super().get_context_data(**kwargs)
+        context['butacas'] = reversed(self.object.butaca_set.all())
+        return context
+
 
 @csrf_exempt
 def crear_entrada(request):
@@ -159,3 +177,26 @@ def crear_entrada(request):
             return JsonResponse({'message': 'Datos incorrectos'})
     else:
         return JsonResponse({'message': 'Método no permitido'})
+
+@csrf_exempt
+def modificar_butaca(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        entrada_id = data.get('entradaId')
+        butaca_id = data.get('butacaId') # Obtiene el ID de la butaca desde la solicitud
+
+        # Realiza la modificación de la butaca en la base de datos
+        try:
+            butaca = Butaca.objects.get(id=butaca_id) # Utiliza el ID de la butaca para obtener el objeto de la base de datos
+            # Modifica los campos de la butaca según tus necesidades
+            butaca.estado = 'ocupado'
+            butaca.save()
+
+            # Devuelve una respuesta JSON indicando que la butaca se modificó correctamente
+            response_data = {'message': 'Butaca modificada exitosamente'}
+            return JsonResponse(response_data)
+        except Butaca.DoesNotExist:
+            # Si la butaca no existe, devuelve un mensaje de error
+            response_data = {'error': 'La butaca no existe'}
+            return JsonResponse(response_data, status=400)
+

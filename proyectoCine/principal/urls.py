@@ -26,4 +26,6 @@ urlpatterns = [
     path('modificarButaca/<int:pk>', ButacaUpdateView.as_view(), name="modificarButaca"),
     path('funcion/int:<pk>', FuncionDetailView.as_view(), name="detalleFuncion"),
     path('funcion/crearEntrada/', crear_entrada, name='crearEntrada'),
+    path('funcion/modificarButaca/', views.modificar_butaca, name='modificarButaca'),
+
 ]
