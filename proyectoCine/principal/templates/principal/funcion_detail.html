@@ -45,9 +45,9 @@
                 <h2>Resumen de la compra</h2>
                 <div>
                     <p>Película: {{funcion.pelicula}}</p>
-                    <p>Horario: 19:30 - 12/06/2023</p>
+                    <p>Hora inicio:  {{funcion.fechaInicio|time:"H:i"}} - {{funcion.fechaInicio|date:"d/m/Y"}}
                     <p>Cantidad de boletos: <span id="numEntradas">0</span></p>
-                    <p>Precio entrada: $10.00</p>
+                    <p>Precio entrada: 8.50€</p>
                     <p>Total: <span id="totalEntradas"></span></p>
                      
                 </div>
@@ -72,7 +72,7 @@
                     </div>
                     <br>
                     <div class="divBtnConfPago">
-                        <button type="submit">Pagar</button>  <button id="btnVolver">Volver</button>
+                        <button type="submit" id="btnPagar">Pagar</button>  <button id="btnVolver">Volver</button>
                     </div>
                 </form>
             </section>

@@ -1,4 +1,4 @@
-entradas=0
+entradas = 0
 
 $(document).ready(
   function () {
@@ -16,52 +16,88 @@ $(document).ready(
 
     $('.butaca').click(function () {
       var estado = $(this).attr('estado');
-   
+
 
       if (estado === 'disponible') {
         $(this).attr('fill', '#28a745');
         $(this).attr('estado', 'seleccionada');
-        entradas+=1
+        entradas += 1
       } else if (estado === 'seleccionada') {
         $(this).attr('fill', '#ffffff');
         $(this).attr('estado', 'disponible');
-        entradas=entradas-1
+        entradas = entradas - 1
       }
 
       $('#numEntradas').empty();
       $('#numEntradas').html(entradas);
+      $('#totalEntradas').empty();
+      $('#totalEntradas').html((entradas * 8.50) + ('€'));
+
+      precio = entradas * 8.50
+
 
     });
 
     $('#btnComprar').click(function slideOut() {
-      console.log("las")
-      var myDiv = document.getElementById("divAni");
-      var myDiv2 = document.getElementById("secondDiv");
-      
-      myDiv.classList.add("slide-out");
-      myDiv2.classList.add("slide-in");
+      if (entradas > 0) {
+        var myDiv = document.getElementById("divAni");
+        var myDiv2 = document.getElementById("secondDiv");
 
-      // Esperar a que finalice la animación antes de eliminar el div
-      $("#secondDiv").css('display', 'flex');
-      setTimeout(function () {
-        $("#divAni").css('display', 'none');
-      }, 500);
+        myDiv.classList.add("slide-out");
+        myDiv2.classList.add("slide-in");
 
+        // Esperar a que finalice la animación antes de eliminar el div
+        $("#secondDiv").css('display', 'flex');
+        setTimeout(function () {
+          $("#divAni").css('display', 'none');
+        }, 500);
+      }
     })
 
     $('#btnVolver').click(function slideOut() {
       var myDiv = document.getElementById("divAni");
       var myDiv2 = document.getElementById("secondDiv");
-    
+
       // Eliminar las clases de animación
       myDiv.classList.remove("slide-out");
       myDiv2.classList.remove("slide-in");
-    
+
       // Mostrar nuevamente el primer div y ocultar el segundo div
       $("#divAni").css('display', 'block');
       $("#secondDiv").css('display', 'none');
 
     })
+
+    precio =10
+    $('#btnPagar').click(function (event) {
+      console.log(precio)
+      event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+    
+      fetch('crearEntrada/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': '{{ csrf_token }}', // Si estás utilizando CSRF protection, asegúrate de que se inserte correctamente
+        },
+        body: JSON.stringify({ precio: precio }), // Datos que quieres enviar al servidor
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          // Manejo de la respuesta del servidor
+          console.log(data);
+
+          if (data.hasOwnProperty('id')) {
+            var entradaId = data.id;
+            console.log('ID de la entrada:', entradaId);
+          }
+        })
+        .catch(function (error) {
+          // Manejo de errores
+          console.error(error);
+        });
+    });
   }
 );
 
