@@ -16,6 +16,11 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .forms import *
 
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+import json
+
 # Create your views here.
 class PeliculaListView(ListView):
     model = Pelicula
@@ -137,3 +142,20 @@ class FuncionDetailView(DetailView):
             context = super().get_context_data(**kwargs)
             context['butacas'] = reversed(self.object.butaca_set.all())
             return context
+
+@csrf_exempt
+def crear_entrada(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        precio = data.get('precio')
+
+        if precio is not None:
+            # Crea la entrada en la base de datos
+            entrada = Entrada(usuario=request.user, precio=precio)
+            entrada.save()
+
+            return JsonResponse({'message': 'Entrada creada exitosamente', 'id': entrada.id})
+        else:
+            return JsonResponse({'message': 'Datos incorrectos'})
+    else:
+        return JsonResponse({'message': 'Método no permitido'})

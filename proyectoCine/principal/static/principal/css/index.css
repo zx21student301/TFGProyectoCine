@@ -457,11 +457,124 @@ margin-left: 20px;
   width: 100%;
 }
 
-.funcionDetail{
+#funcionDetail{
   width: 100%;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
+  overflow: hidden;
+}
+
+#divAni{
+  transition: transform 0.5s ease-out;
+  width: fit-content;
+  height: fit-content;
+}
+
+#secondDiv{
+  transition: transform 0.5s ease-out;
+  width: fit-content;
+  height: fit-content;
+  display: none;
+}
+
+.slide-out {
+  transform: translateX(-200%);
+}
+
+
+
+
+
+.butaca{
+  margin: 5px;
+}
+
+.centrarBotonCompra{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.centrarBotonCompra button{
+  background-color: #28a745;
+  color: white;
+  list-style-type: none;
+  border-radius: 15px;
+  font-size: 24px;
+  transition: background-color 0.5s;
+}
+
+.centrarBotonCompra button:hover{
+  background-color: #0d8b6e;
+}
+
+
+#secondDiv section {
+  margin-bottom: 20px;
+}
+
+#secondDiv h2 {
+  color: #ffffff;
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+#secondDiv form {
+
+  grid-gap: 10px;
+}
+
+#secondDiv label {
+  display: block;
+  font-weight: bold;
+}
+
+#secondDiv input[type="text"] {
+  padding: 5px;
+  width: 100%;
+}
+
+#secondDiv button{
+  background-color: #dc3545;
+  border: none;
+  border-radius: 15px;
+  font-size: 24px;
+  color: #fff;
+  padding: 5px 15px;
+  margin: 10px 70px;
+}
+
+#secondDiv button[type="submit"] {
+  background-color: #28a745;
+  border: none;
+  border-radius: 15px;
+  font-size: 24px;
+  color: #fff;
+  padding: 5px 15px;
+  margin: 10px 50px;
+}
+
+
+/* Estilos específicos */
+
+.resumen-compra p {
+  margin: 5px 0;
+  font-size: 24px;
+}
+
+.detalles-pago label {
+  margin-top: 10px;
+  font-size: 24px;
+}
+
+.detalles-pago div{
+  display: inline-block;
+}
+
+.divBtnConfPago{
+  width: 100%;
+  text-align: center;
 }
