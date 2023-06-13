@@ -1,0 +1,30 @@
+{% extends 'principal/administracion.html' %}
+{% block contenido %}
+<div class="content">
+  <div class="listaDiv">
+    <table class="mostrarPeliculas">
+      <thead>
+        <tr>
+          <th class="bordeDerecho">ID Usuario</th>
+          <th class="bordeDerecho">ID Película</th>
+          <th class="bordeDerecho">Comentario</th>
+          <th class="bordeDerecho">Puntuación</th>
+          <th >Borrar</th>
+          <!-- Agrega más encabezados de columnas según tus necesidades -->
+        </tr>
+      </thead>
+      <tbody>
+        {% for comentario in comentarios %}
+          <tr>
+            <td>{{ comentario.usuario }}</td>
+            <td>{{ comentario.pelicula }}</td>
+            <td>{{ comentario.comentario }}</td>
+            <td>{{ comentario.puntuacion }}</td>
+            <td><a href="{% url 'borrarComentario' comentario.id %}" class="btn btn-outline-warning">Eliminar</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

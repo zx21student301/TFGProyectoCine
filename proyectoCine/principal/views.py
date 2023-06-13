@@ -269,3 +269,14 @@ class UsuarioDetailView(DetailView):
         context['pelicula_por_entrada'] = pelicula_por_entrada
         context['sala_por_entrada'] = sala_por_entrada
         return context
+
+
+class ComentarioAdminListView(ListView):
+    model = Comentario
+    template_name = 'principal/administracionComentario.html'
+    context_object_name = 'comentarios'
+
+
+class ComentarioAdminDeleteView(DeleteView):
+    model = Comentario
+    success_url = reverse_lazy('listadoComentariosAdmin')

@@ -31,6 +31,6 @@ urlpatterns = [
     path('funcion/crearEntrada/', crear_entrada, name='crearEntrada'),
     path('funcion/modificarButaca/', views.modificar_butaca, name='modificarButaca'),
     path('miCuenta/<int:pk>/', UsuarioDetailView.as_view(), name='miCuenta'),
-
-
+    path('administracion/comentario',  ComentarioAdminListView.as_view() ,name='listadoComentariosAdmin'),
+    path('borrarComentario/<int:pk>', ComentarioAdminDeleteView.as_view(), name="borrarComentario"),
 ]

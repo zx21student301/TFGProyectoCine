@@ -95,6 +95,10 @@ class Comentario(models.Model):
         verbose_name_plural = "comentarios"
         ordering = ['-created']
 
+    def __str__(self):
+        cadena = "el comentario '{}' de {} sobre la película {}".format(self.comentario, self.usuario, self.pelicula)
+        return cadena
+
 class Promocion(models.Model):
     nombre = models.CharField(max_length=255, verbose_name='Nombre')
     descripcion = models.TextField(verbose_name='Descripcion')

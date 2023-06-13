@@ -1,0 +1,16 @@
+{% extends 'principal/administracion.html' %}
+
+{% block contenido %}
+<div class="content">
+    <div class="listaDiv">
+        <form method="post" class="form-container">
+            {% csrf_token %}
+            <p class="form-message">¿Estás seguro de que quieres eliminar <strong>{{comentario}}</strong>?</p>
+            <div class="form-field">
+                {{ form }}
+            </div>
+            <input type="submit" value="Confirmar" class="form-submit">
+        </form>
+</div>
+</div>
+{% endblock %}
