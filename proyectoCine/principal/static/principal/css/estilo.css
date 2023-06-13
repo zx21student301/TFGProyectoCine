@@ -452,8 +452,6 @@ margin-left: 20px;
 }
 
 #footDetail{
-  position: absolute;
-  bottom: 0px;
   width: 100%;
 }
 
@@ -577,4 +575,10 @@ margin-left: 20px;
 .divBtnConfPago{
   width: 100%;
   text-align: center;
+}
+
+
+.divComentarios{
+  margin-bottom: 100px;
+  border: solid green 10px;
 }
