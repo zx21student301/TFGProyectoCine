@@ -96,7 +96,7 @@
                                     <span id="registrarseID"><a href="{% url 'registro' %}"> Registrarse</a></span> 
                                     <span id="iniciarID"><a href="{% url 'iniSesion' %}">Iniciar Sesion</a></span>
                                     {% else %}
-                                        <a href="{% url 'logout' %}">Mi cuenta</a>
+                                        <a href="{% url  'miCuenta'  user.id %}">Mi cuenta</a>
                                         <a href="{% url 'logout' %}">Salir</a>
                                     {% endif %}
                                 </div>

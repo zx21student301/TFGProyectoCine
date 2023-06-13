@@ -1,0 +1,38 @@
+{% extends "auth/baseHeader.html" %}
+{% block contenido %}
+
+<div class="contentUsuario">
+    <div>
+        <div>
+            {% for entrada in entradas %}
+                {{ entrada.pelicula.titulo }}
+            {% endfor %}
+            <p>Bienvenido {{user.first_name}}</p>
+        </div>
+        <div>
+                {% for entrada in entradas %}
+                    <a href="">
+                        <div id="listarCamion">
+                            <div id="divListarImg">
+                                <img src="{{ entrada.funcion.pelicula.imagen.url }}" alt="">
+                            </div>
+                            <div id="divListarDatos">
+                                <p id="nombreCamion">{{ pelicula_por_entrada.0 }}</p>
+                                <p id="precioCamion">{{ entrada.precio }} €</p>
+                                <p id="kmCamion"> 
+                                    {% for butaca in butacas_por_entrada.0 %}
+                                        {{ butaca.numero }},
+                                    {% endfor %}
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                {% empty %}
+                    <li>No se encontraron entradas asignadas.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -78,6 +78,7 @@ $(document).ready(
 
     })
 
+
     precio = 10
     $('#btnPagar').click(function (event) {
       console.log(precio)
@@ -100,12 +101,13 @@ $(document).ready(
 
           if (data.hasOwnProperty('id')) {
             var entradaId = data.id;
+            var userId = data.user_id;
             console.log('ID de la entrada:', entradaId);
-
+            console.log('ID del usuario:', userId);
 
             // Recorre la lista de IDs de butacas y realiza una solicitud AJAX para modificar cada butaca
-            butacasId.forEach(function (butacaId) {
-              fetch('modificarButaca/', {
+            var fetchPromises = butacasId.map(function (butacaId) {
+              return fetch('modificarButaca/', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -125,6 +127,17 @@ $(document).ready(
                   console.error(error);
                 });
             });
+
+            // Esperar a que todas las solicitudes AJAX se completen
+            Promise.all(fetchPromises)
+              .then(function () {
+                // Redirigir a otra plantilla de Django después de que todas las solicitudes se completen
+                window.location.href = '/miCuenta/'+ userId + '/';
+              })
+              .catch(function (error) {
+                // Manejo de errores
+                console.error(error);
+              });
           }
         })
         .catch(function (error) {
@@ -132,8 +145,6 @@ $(document).ready(
           console.error(error);
         });
     });
-
-
 
   }
 );

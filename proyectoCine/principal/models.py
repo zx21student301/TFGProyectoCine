@@ -59,21 +59,7 @@ class Funcion(models.Model):
         return self.fechaInicio
 
 
-# class Usuario(models.Model):
-#     nombre = models.CharField(max_length=700)
-#     apellido = models.CharField(max_length=700)
-#     correoElectronico = models.CharField(max_length=700)
-#     contraseña = models.CharField(max_length=700)
-#     administrador = models.BooleanField(default=False, verbose_name='Administrador')
-#     created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creación')
 
-#     class Meta:
-#         verbose_name = 'usuario'
-#         verbose_name_plural = "usuarios"
-#         ordering = ['-created']
-
-#     def __str__(self):
-#         return self.nombre
     
 class Entrada(models.Model):
     usuario = models.ForeignKey(User, verbose_name='Usuario' , on_delete=models.CASCADE)
@@ -133,3 +119,18 @@ class UsuarioPromocion(models.Model):
         verbose_name_plural = "Usuarios y Promociones"
         ordering = ['-created']
 
+# class Usuario(models.Model):
+#     nombre = models.CharField(max_length=700)
+#     apellido = models.CharField(max_length=700)
+#     correoElectronico = models.CharField(max_length=700)
+#     contraseña = models.CharField(max_length=700)
+#     administrador = models.BooleanField(default=False, verbose_name='Administrador')
+#     created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creación')
+
+#     class Meta:
+#         verbose_name = 'usuario'
+#         verbose_name_plural = "usuarios"
+#         ordering = ['-created']
+
+#     def __str__(self):
+#         return self.nombre

@@ -9,7 +9,6 @@ from django.contrib.auth import authenticate, login
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from .models import *
-from .models import Pelicula
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
@@ -176,7 +175,7 @@ def crear_entrada(request):
             entrada = Entrada(usuario=request.user, precio=precio)
             entrada.save()
 
-            return JsonResponse({'message': 'Entrada creada exitosamente', 'id': entrada.id})
+            return JsonResponse({'message': 'Entrada creada exitosamente', 'id': entrada.id, 'user_id': request.user.id})
         else:
             return JsonResponse({'message': 'Datos incorrectos'})
     else:
@@ -205,6 +204,8 @@ def modificar_butaca(request):
         try:
             butaca = Butaca.objects.get(id=butaca_id) # Utiliza el ID de la butaca para obtener el objeto de la base de datos
             # Modifica los campos de la butaca según tus necesidades
+            entrada = Entrada.objects.get(id=entrada_id)
+            butaca.entrada = entrada
             butaca.estado = 'ocupado'
             butaca.save()
 
@@ -215,3 +216,30 @@ def modificar_butaca(request):
             # Si la butaca no existe, devuelve un mensaje de error
             response_data = {'error': 'La butaca no existe'}
             return JsonResponse(response_data, status=400)
+
+class UsuarioDetailView(DetailView):
+    model = User
+
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.object
+        entradas = Entrada.objects.filter(usuario=user).order_by('-created')
+        butacas_por_entrada = []
+        funcion_por_entrada = []
+        pelicula_por_entrada = []
+        for entrada in entradas:
+            butacas = Butaca.objects.filter(entrada=entrada).order_by('-created')
+            butacas_por_entrada.append(butacas)
+            if butacas.exists():
+                funcion = butacas.first().funcion
+                pelicula = funcion.pelicula
+                funcion_por_entrada.append(funcion)
+                pelicula_por_entrada.append(pelicula)
+        
+        context['entradas'] = entradas
+        context['butacas_por_entrada'] = butacas_por_entrada
+        context['funcion_por_entrada'] = funcion_por_entrada
+        context['pelicula_por_entrada'] = pelicula_por_entrada
+        return context
