@@ -15,6 +15,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from django.urls import reverse_lazy
 from .forms import *
+from django.urls import reverse
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -183,16 +184,37 @@ def crear_entrada(request):
         return JsonResponse({'message': 'Método no permitido'})
 
 
-def crear_comentario(request):
-    if request.method == 'POST':
-        form = ComentarioForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('detalle')
-    else:
-        form = ComentarioForm()
+def crearComentario(request):
+    id_p = request.GET['pelicula_id']
+    pelicula = Pelicula.objects.get(id=id_p)
 
-    return render(request, 'pelicula_list.html', {'form': form})
+    id_u = request.user
+    c = request.GET['comentario']
+    p = request.GET['puntuacion']
+
+    coment = Comentario(usuario = id_u, pelicula = pelicula, comentario = c, puntuacion = p)
+    coment.save()
+
+    return HttpResponseRedirect(reverse('detalle', args=[id_p]))
+
+def borrarComentario(request,identificador,id_p):
+    Comentario.objects.filter(id=identificador).delete()
+
+    return HttpResponseRedirect(reverse('detalle', args=[id_p]))
+
+def updateComentario(request,id_p):
+    idp = request.GET['comentario_id']
+
+    ob = Comentario.objects.get(id=idp)
+
+    nc = request.GET['comentario_nuevo']
+    np = request.GET['puntuacion_nueva']
+
+    ob.comentario = nc
+    ob.puntuacion = np
+    ob.save()
+
+    return HttpResponseRedirect(reverse('detalle', args=[id_p]))
     
 @csrf_exempt
 def modificar_butaca(request):

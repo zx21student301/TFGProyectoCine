@@ -1,5 +1,5 @@
 from django import forms
-from .models import Butaca, Comentario
+from .models import Butaca
 
 class ButacaForm(forms.ModelForm):
     class Meta:

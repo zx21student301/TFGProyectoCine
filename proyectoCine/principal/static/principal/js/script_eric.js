@@ -133,7 +133,17 @@ $(document).ready(
         });
     });
 
+    $('#barra').on('input', function() {
+      $('#valorSeleccionado').text($(this).val());
+    });
 
+    $('.puntuacion_nueva').on('input', function() {
+      $('.valorSeleccionado_nuevo').text($(this).val());
+      console.log($(this).val());
+    });
+
+    // Deshabilitar la barra deslizante
+    $('.barra_ver').prop('disabled', true);
 
   }
 );

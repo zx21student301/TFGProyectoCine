@@ -48,44 +48,64 @@
         </div>
     </div>
     <div class="container cuerpo cuerpoComentarios" style="margin-top: 2rem;">
-        <div class="card">
-            <div class="card-header" style="color:black">
-                <h3>Comentarios<a href="{% url 'listado' %}" class="btn btn-primary float-end" data-bs-toggle="modal"
-                        data-bs-target="#crearModal">
-                    Añadir comentario</a></h3>
-            </div>
-            <div class="card-body">
-                <ul class="comment-list">
-                    {% for c in comentarios %}
-                    {% if c.pelicula_id == pelicula.id %}
-                    <li class="comment">
+        <div class="container">
+            <h3>Comentarios
+                <a {% if not request.user.is_authenticated %} href="{% url 'iniSesion' %}" {% else %} href=""
+                    data-bs-toggle="modal" data-bs-target="#crearModal" {% endif %} class="btn btn-primary float-end">
+                    Añadir comentario</a>
+            </h3>
+            <div class="card-deck">
+                {% for c in comentarios %}
+                {% if c.pelicula_id == pelicula.id %}
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color:black">Comentario de: 
+                            <div class="float-end btn-group">
+                                <span style="color:black">Valoración</span>
+                            </div>
+                        </h5>
                         {% for u in users %}
                         {% if c.usuario_id == u.id %}
-                        <div class="comment-author" style="color:black">{{u.username}}</div>
+                        <h6 class="card-subtitle mb-2" style="color:black">{{u.username}}
+                            <div class="float-end btn-group">
+                                <input type="range" class="barra_ver" name="puntuacion_ver" min="0" max="100" step="1"
+                                    value="{{c.puntuacion}}">
+                                <span class="valorSeleccionado_ver" style="color:black">{{c.puntuacion}}</span>
+                            </div>
+                        </h6>
                         {% endif %}
                         {% endfor %}
-                        <div class="comment-text" style="color:black">{{c.comentario}}</div>
-                    </li>
-                    {% endif %}
-                    {% endfor %}
-                </ul>
+                        <p class="card-text" style="color:black">{{ c.comentario }}</p>
+                        {% if user.is_authenticated %}
+                        {% if c.usuario_id == user.id %}
+                        <div class="btn-group float-end" role="group">
+                            <a href="" data-bs-toggle="modal" data-bs-target="#updateModal{{c.id}}"
+                                class="btn btn-primary">Modificar</a>
+                            <a href="{% url 'borrarComentario' c.id pelicula.id%}" class="btn btn-danger">Borrar</a>
+                        </div>
+                        {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
             </div>
         </div>
     </div>
 </div>
 
 <!-- Modal crear comentario-->
-<div class="modal fade divComentarios" id="crearModal" tabindex="-1" aria-labelledby="crearModalLabel" aria-hidden="true">
+<div class="modal fade divComentarios" id="crearModal" tabindex="-1" aria-labelledby="crearModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="crearModalLabel">Crear Comentario</h5>
+                <h5 class="modal-title" id="crearModalLabel" style="color:black">Crear Comentario</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
                 <!-- Formulario para crear un elemento -->
-                <form method="POST" action="{% url 'crear_comentario' %}">
-                    {% csrf_token %}
+                <form method="GET" action="{% url 'crearComentario' %}">
                     {% if user.is_authenticated %}
                     <input type="hidden" name="usuario_id" value="{{user.id}}">
                     {% endif %}
@@ -93,10 +113,11 @@
                     <div class="mb-3">
                         <label for="nombre" style="color:black">Valoración</label>
                         <input type="range" id="barra" name="puntuacion" min="0" max="100" step="1">
+                        <span id="valorSeleccionado" style="color:black"></span>
                     </div>
                     <div class="mb-3">
                         <label for="Comentario" style="color:black">Comentario</label>
-                        <textarea class="form-control" id="Comentario" name="Comentario"></textarea>
+                        <textarea class="form-control" id="comentario" name="comentario"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Crear</button>
                 </form>
@@ -105,5 +126,36 @@
     </div>
 </div>
 
+{% for c in comentarios %}
+<!-- Modal update comentario-->
+<div class="modal fade divComentarios" id="updateModal{{c.id}}" tabindex="-1" aria-labelledby="updateModal{{c.id}}Label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateModal{{c.id}}Label" style="color:black">Modificar Comentario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulario para crear un elemento -->
+                <form method="GET" action="{% url 'updateComentario' pelicula.id %}">
+                    <input type="hidden" name="comentario_id" value="{{c.id}}">
+                    <div class="mb-3">
+                        <label for="nombre" style="color:black">Valoración</label>
+                        <input type="range" class="puntuacion_nueva" name="puntuacion_nueva" min="0" max="100" step="1"
+                            value="{{c.puntuacion}}">
+                        <span class="valorSeleccionado_nuevo" style="color:black">{{c.puntuacion}}</span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Comentario" style="color:black">Comentario</label>
+                        <textarea class="form-control" name="comentario_nuevo">{{c.comentario}}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Modificar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
 
 {% endblock %}
