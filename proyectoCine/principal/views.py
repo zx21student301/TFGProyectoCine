@@ -228,13 +228,16 @@ class UsuarioDetailView(DetailView):
         entradas = Entrada.objects.filter(usuario=user).order_by('-created')
         butacas_por_entrada = []
         funcion_por_entrada = []
+        sala_por_entrada = []
         pelicula_por_entrada = []
         for entrada in entradas:
             butacas = Butaca.objects.filter(entrada=entrada).order_by('-created')
             butacas_por_entrada.append(butacas)
             if butacas.exists():
                 funcion = butacas.first().funcion
+                sala = funcion.sala
                 pelicula = funcion.pelicula
+                sala_por_entrada.append(sala)
                 funcion_por_entrada.append(funcion)
                 pelicula_por_entrada.append(pelicula)
         
@@ -242,4 +245,5 @@ class UsuarioDetailView(DetailView):
         context['butacas_por_entrada'] = butacas_por_entrada
         context['funcion_por_entrada'] = funcion_por_entrada
         context['pelicula_por_entrada'] = pelicula_por_entrada
+        context['sala_por_entrada'] = sala_por_entrada
         return context

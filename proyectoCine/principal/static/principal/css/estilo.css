@@ -598,9 +598,9 @@ margin-left: 20px;
 
 
 
-#listarCamion {
+#listarPelicula {
   width: 900px;
-  height: 250px;
+  height: fit-content;
   border-radius: 50px;
   box-shadow: rgba(247, 246, 246, 0.35) 5px 5px 25px;
   display: flex;
@@ -616,7 +616,6 @@ margin-left: 20px;
 }
 
 #divListarImg img {
-  height: 150px;
   width: 200px;
   border-radius: 10px;
   overflow: hidden;
@@ -629,30 +628,45 @@ margin-left: 20px;
   width: 500px;
 }
 
-#nombreCamion,
-#precioCamion {
+#nombrePelicula,
+#precioPelicula {
 
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  font-size: 24px;
-  color: rgb(0, 0, 0);
+  font-size: 32px;
+  color: #00081d;
   font-weight: bold;
   text-align: left;
 }
 
-#precioCamion {
-  color: rgb(0, 0, 0);
-  margin-top: 20px;
+#precioPelicula {
+  color: #00081d;
+  margin-top: 10px;
   margin-left: 5px;
+  font-size: 28px;
 
 }
 
-#kmCamion {
+#kmPelicula {
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-size: 24px;
-  color: rgb(0, 0, 0);
+  color: #00081d;
   font-weight: bold;
   margin-top: 20px;
   margin-left: 5px;
   text-align: left;
+
+}
+
+#tituloUser{
+  width: 100%;
+  text-align: center;
+  font-size: 50px;
+  margin-top: -10%;
+}
+
+#subtituloUser{
+  font-size: 38px;
+  margin-top: 30px;
+  margin-bottom: -30px;
 
 }

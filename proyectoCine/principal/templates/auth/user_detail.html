@@ -3,30 +3,33 @@
 
 <div class="contentUsuario">
     <div>
-        <div>
-            {% for entrada in entradas %}
-                {{ entrada.pelicula.titulo }}
-            {% endfor %}
+        <div id="tituloUser">
             <p>Bienvenido {{user.first_name}}</p>
+            <p id="subtituloUser">Tus entradas:</p>
         </div>
         <div>
                 {% for entrada in entradas %}
-                    <a href="">
-                        <div id="listarCamion">
+                  
+                        <div id="listarPelicula">
                             <div id="divListarImg">
-                                <img src="{{ entrada.funcion.pelicula.imagen.url }}" alt="">
+                                <img src="{{ pelicula_por_entrada.0.imagen.url }}" alt="">
                             </div>
                             <div id="divListarDatos">
-                                <p id="nombreCamion">{{ pelicula_por_entrada.0 }}</p>
-                                <p id="precioCamion">{{ entrada.precio }} €</p>
-                                <p id="kmCamion"> 
+                                <p id="nombrePelicula">{{ pelicula_por_entrada.0 }}</p>
+                                <p id="kmPelicula">{{ funcion_por_entrada.0.fecha }} - {{ funcion_por_entrada.0.fechaInicio|time }}</p>
+                                <p id="kmPelicula">{{ sala_por_entrada.0.nombre }}</p>
+                                <p id="kmPelicula"> Butacas:
                                     {% for butaca in butacas_por_entrada.0 %}
-                                        {{ butaca.numero }},
+                                        {{ butaca.numero }}
+                                        {% if not forloop.last %}
+                                        ,
+                                        {% endif %}
                                     {% endfor %}
                                 </p>
+                                <p id="precioPelicula">Total: {{ entrada.precio }} €</p>
                             </div>
                         </div>
-                    </a>
+                  
                 {% empty %}
                     <li>No se encontraron entradas asignadas.</li>
                 {% endfor %}
