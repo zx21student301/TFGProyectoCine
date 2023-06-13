@@ -1,4 +1,5 @@
 entradas = 0
+butacasId = []
 
 $(document).ready(
   function () {
@@ -22,11 +23,20 @@ $(document).ready(
         $(this).attr('fill', '#28a745');
         $(this).attr('estado', 'seleccionada');
         entradas += 1
+        console.log($(this).attr("id"));
+        butacasId.push(parseInt($(this).attr("id")));
       } else if (estado === 'seleccionada') {
         $(this).attr('fill', '#ffffff');
         $(this).attr('estado', 'disponible');
         entradas = entradas - 1
+
+        index = butacasId.indexOf(parseInt($(this).attr("id")));
+        if (index !== -1) {
+          butacasId.splice(index, 1); // Elimina el elemento del array
+        }
       }
+
+      console.log(butacasId)
 
       $('#numEntradas').empty();
       $('#numEntradas').html(entradas);
@@ -68,11 +78,11 @@ $(document).ready(
 
     })
 
-    precio =10
+    precio = 10
     $('#btnPagar').click(function (event) {
       console.log(precio)
       event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
-    
+
       fetch('crearEntrada/', {
         method: 'POST',
         headers: {
@@ -91,6 +101,30 @@ $(document).ready(
           if (data.hasOwnProperty('id')) {
             var entradaId = data.id;
             console.log('ID de la entrada:', entradaId);
+
+
+            // Recorre la lista de IDs de butacas y realiza una solicitud AJAX para modificar cada butaca
+            butacasId.forEach(function (butacaId) {
+              fetch('modificarButaca/', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'X-CSRFToken': '{{ csrf_token }}',
+                },
+                body: JSON.stringify({ entradaId: entradaId, butacaId: butacaId }),
+              })
+                .then(function (response) {
+                  return response.json();
+                })
+                .then(function (data) {
+                  // Manejo de la respuesta del servidor para cada butaca modificada
+                  console.log(data);
+                })
+                .catch(function (error) {
+                  // Manejo de errores
+                  console.error(error);
+                });
+            });
           }
         })
         .catch(function (error) {
@@ -98,8 +132,13 @@ $(document).ready(
           console.error(error);
         });
     });
+
+
+
   }
 );
+
+
 
 
 //   $('#registrarseID').click(function () {
