@@ -36,6 +36,10 @@ class PeliculaDetailView(DetailView):
         pelicula = self.get_object()
         funciones = pelicula.funcion_set.all().order_by('fechaInicio')
         context['funciones'] = funciones
+        comentarios = pelicula.comentario_set.all().order_by('created')
+        context['comentarios'] = comentarios
+        users = User.objects.all()  # Obtener todos los usuarios
+        context['users'] = users
         return context
 
 
@@ -178,6 +182,18 @@ def crear_entrada(request):
     else:
         return JsonResponse({'message': 'Método no permitido'})
 
+
+def crear_comentario(request):
+    if request.method == 'POST':
+        form = ComentarioForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('detalle')
+    else:
+        form = ComentarioForm()
+
+    return render(request, 'pelicula_list.html', {'form': form})
+    
 @csrf_exempt
 def modificar_butaca(request):
     if request.method == 'POST':
@@ -199,4 +215,3 @@ def modificar_butaca(request):
             # Si la butaca no existe, devuelve un mensaje de error
             response_data = {'error': 'La butaca no existe'}
             return JsonResponse(response_data, status=400)
-
