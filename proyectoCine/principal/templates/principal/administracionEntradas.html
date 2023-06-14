@@ -1,0 +1,27 @@
+{% extends 'principal/administracion.html' %}
+{% block contenido %}
+<div class="content">
+  <div class="listaDiv" id="mostrarButacas">
+    <table class="mostrarPeliculas">
+      <thead>
+        <tr>
+          <th class="bordeDerecho">Butaca Id</th>
+          <th class="bordeDerecho">Precio</th>
+          <th >Usuario Id</th>
+          <!-- Agrega más encabezados de columnas según tus necesidades -->
+        </tr>
+      </thead>
+      <tbody>
+        {% for entrada in entradas %}
+          <tr>
+            <td>{{ entrada.id }}</td>
+            <td>{{ entrada.precio }}</td>
+            <td>{{ entrada.usuario }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+      
+    </table>
+  </div>
+</div>
+{% endblock %}

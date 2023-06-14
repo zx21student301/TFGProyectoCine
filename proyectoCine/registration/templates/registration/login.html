@@ -97,7 +97,6 @@
     <div class="divCuentas">
         <form action="" method="post">
             {% csrf_token %}
-            {{ form.as_p }}
              <ul class="custom-tab-group">
                  <li class="custom-tab" id="tituloReg"><a href="{% url 'registro' %}">Regístrate</a></li>
                  <li class="custom-tab active" id="tituloIni"><a href="#custom-login">Iniciar Sesión</a></li>

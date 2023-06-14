@@ -12,7 +12,6 @@ $(document).ready(
         $(this).toggle($(this).find(".tituloPelicula").text().toLowerCase().indexOf(value) > -1)
       });
       valor = value
-      console.log(valor)
     });
 
     $('.butaca').click(function () {
@@ -23,7 +22,6 @@ $(document).ready(
         $(this).attr('fill', '#28a745');
         $(this).attr('estado', 'seleccionada');
         entradas += 1
-        console.log($(this).attr("id"));
         butacasId.push(parseInt($(this).attr("id")));
       } else if (estado === 'seleccionada') {
         $(this).attr('fill', '#ffffff');
@@ -35,8 +33,6 @@ $(document).ready(
           butacasId.splice(index, 1); // Elimina el elemento del array
         }
       }
-
-      console.log(butacasId)
 
       $('#numEntradas').empty();
       $('#numEntradas').html(entradas);
@@ -81,7 +77,6 @@ $(document).ready(
 
     precio = 10
     $('#btnPagar').click(function (event) {
-      console.log(precio)
       event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
 
       fetch('crearEntrada/', {
@@ -97,7 +92,6 @@ $(document).ready(
         })
         .then(function (data) {
           // Manejo de la respuesta del servidor
-          console.log(data);
 
           if (data.hasOwnProperty('id')) {
             var entradaId = data.id;
@@ -132,7 +126,7 @@ $(document).ready(
             Promise.all(fetchPromises)
               .then(function () {
                 // Redirigir a otra plantilla de Django después de que todas las solicitudes se completen
-                window.location.href = '/miCuenta/'+ userId + '/';
+                window.location.href = '/miCuenta/' + userId + '/';
               })
               .catch(function (error) {
                 // Manejo de errores
@@ -146,19 +140,28 @@ $(document).ready(
         });
     });
 
-    $('#barra').on('input', function() {
+    $('#barra').on('input', function () {
       $('#valorSeleccionado').text($(this).val());
     });
 
-    $('.puntuacion_nueva').on('input', function() {
+    $('.puntuacion_nueva').on('input', function () {
       $('.valorSeleccionado_nuevo').text($(this).val());
-      console.log($(this).val());
     });
 
     // Deshabilitar la barra deslizante
     $('.barra_ver').prop('disabled', true);
 
+
+    console.log($('#divCrearEntradas').remove())
+
+    numEntradas = "{{entradas}}"
+    $('#divCrearEntradas').remove()
+    console.log(entradas)
+
+
   }
+
+
 );
 
 

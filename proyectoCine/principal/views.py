@@ -18,8 +18,10 @@ from django.urls import reverse
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 import json
+
 
 # Create your views here.
 
@@ -42,25 +44,27 @@ class PeliculaDetailView(DetailView):
         context['users'] = users
         return context
 
-
+@login_required
 def administracion(request):
     template = loader.get_template("principal/administracion.html")
     return HttpResponse(template.render())
 
+        
 
+@method_decorator(login_required, name='dispatch')
 class PeliculaAdminListView(ListView):
     model = Pelicula
     template_name = 'principal/administracionPeliculas.html'
     context_object_name = 'peliculas'
 
-
+@method_decorator(login_required, name='dispatch')
 class PeliculaCreatelView(CreateView):
     model = Pelicula
     fields = ['titulo', 'imagen', 'genero', 'duracion', 'sinopsis',
               'director', 'fechaLanzamiento', 'clasificacionEdad', 'disponible']
     success_url = reverse_lazy('listadoPelisAdmin')
 
-
+@method_decorator(login_required, name='dispatch')
 class PeliculaUpdateView(UpdateView):
     model = Pelicula
     fields = ['titulo', 'imagen', 'genero', 'duracion', 'sinopsis',
@@ -68,42 +72,42 @@ class PeliculaUpdateView(UpdateView):
     template_name_suffix = '_update_form'
     success_url = reverse_lazy('listadoPelisAdmin')
 
-
+@method_decorator(login_required, name='dispatch')
 class PeliculaDeleteView(DeleteView):
     model = Pelicula
     success_url = reverse_lazy('listadoPelisAdmin')
 
-
+@method_decorator(login_required, name='dispatch')
 class SalaAdminListView(ListView):
     model = Sala
     template_name = 'principal/administracionSalas.html'
     context_object_name = 'salas'
 
-
+@method_decorator(login_required, name='dispatch')
 class SalaCreatelView(CreateView):
     model = Sala
     fields = ['nombre', 'capacidadMaxima']
     success_url = reverse_lazy('listadoSalasAdmin')
 
-
+@method_decorator(login_required, name='dispatch')
 class SalaUpdateView(UpdateView):
     model = Sala
     template_name_suffix = '_update_form'
     fields = ['nombre', 'capacidadMaxima']
     success_url = reverse_lazy('listadoSalasAdmin')
 
-
+@method_decorator(login_required, name='dispatch')
 class SalaDeleteView(DeleteView):
     model = Sala
     success_url = reverse_lazy('listadoSalasAdmin')
 
-
+@method_decorator(login_required, name='dispatch')
 class FuncionAdminListView(ListView):
     model = Funcion
     template_name = 'principal/administracionFunciones.html'
     context_object_name = 'funciones'
 
-
+@method_decorator(login_required, name='dispatch')
 class FuncionCreatelView(CreateView):
     model = Funcion
     fields = ['fecha', 'fechaInicio', 'fechaFin', 'pelicula', 'sala']
@@ -122,26 +126,26 @@ class FuncionCreatelView(CreateView):
 
         return response
 
-
+@method_decorator(login_required, name='dispatch')
 class FuncionUpdateView(UpdateView):
     model = Funcion
     template_name_suffix = '_update_form'
     fields = ['fecha', 'fechaInicio', 'fechaFin', 'pelicula', 'sala']
     success_url = reverse_lazy('listadoFuncionesAdmin')
 
-
+@method_decorator(login_required, name='dispatch')
 class FuncionDeleteView(DeleteView):
     model = Funcion
     success_url = reverse_lazy('listadoFuncionesAdmin')
 
-
+@method_decorator(login_required, name='dispatch')
 class ButacaAdminListView(ListView):
     model = Butaca
     template_name = 'principal/administracionButacas.html'
     context_object_name = 'butacas'
     ordering = ['funcion__id', 'numero']
 
-
+@method_decorator(login_required, name='dispatch')
 class ButacaUpdateView(UpdateView):
     model = Butaca
     fields = ['estado', 'entrada']
@@ -156,6 +160,7 @@ def crear_butacas(sender, instance, created, **kwargs):
             Butaca.objects.create(funcion=instance, numero=numero)
 
 
+@method_decorator(login_required, name='dispatch')
 class FuncionDetailView(DetailView):
     model = Funcion
 
@@ -183,6 +188,7 @@ def crear_entrada(request):
         return JsonResponse({'message': 'Método no permitido'})
 
 
+@login_required
 def crearComentario(request):
     id_p = request.GET['pelicula_id']
     pelicula = Pelicula.objects.get(id=id_p)
@@ -239,6 +245,7 @@ def modificar_butaca(request):
             response_data = {'error': 'La butaca no existe'}
             return JsonResponse(response_data, status=400)
 
+@method_decorator(login_required, name='dispatch')
 class UsuarioDetailView(DetailView):
     model = User
 
@@ -270,13 +277,21 @@ class UsuarioDetailView(DetailView):
         context['sala_por_entrada'] = sala_por_entrada
         return context
 
-
+@method_decorator(login_required, name='dispatch')
 class ComentarioAdminListView(ListView):
     model = Comentario
     template_name = 'principal/administracionComentario.html'
     context_object_name = 'comentarios'
 
-
+@method_decorator(login_required, name='dispatch')
 class ComentarioAdminDeleteView(DeleteView):
     model = Comentario
     success_url = reverse_lazy('listadoComentariosAdmin')
+
+
+
+@method_decorator(login_required, name='dispatch')
+class EntradaAdminListView(ListView):
+    model = Entrada
+    template_name = 'principal/administracionEntradas.html'
+    context_object_name = 'entradas'

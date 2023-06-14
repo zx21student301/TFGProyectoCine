@@ -1,5 +1,115 @@
-{% extends "auth/baseHeader.html" %}
-{% block contenido %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'principal/img/icon.png' %}">
+    <title>CinesApp</title>
+
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js "></script>
+
+
+    <!-- Nuestro css personalizado -->
+    <link rel="stylesheet" href="{% static 'principal/css/estilo.css' %}">
+
+
+    <!-- Accedemos a JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <!-- Nuestro js personalizado -->
+    <script src="{% static 'principal/js/script_user.js' %}"></script>
+
+
+
+
+</head>
+
+
+<body>
+    <header>
+        <div class="container-fluid header-container">
+            <div class="row">
+                <!-- <div class="col-md-2 col-sm-1"></div> -->
+                <div class="col-md-12 col-sm-10" style="background-color: #e50914;">
+                    <div class="row">
+                        <div class="col-md-1 col-sm-1"> </div>
+                        <div class="col-md-10 my-2 col-sm-1">
+                            <div class="row lead">
+                                <div class="titulo col-md-2" id="tituloPrincipal">
+                                    <a href="{% url 'listado' %}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="32.000000pt"
+                                        height="32.000000pt" viewBox="0 0 500.000000 500.000000"
+                                        preserveAspectRatio="xMidYMid meet">
+                                        <g transform="translate(0.000000,500.000000) scale(0.100000,-0.100000)"
+                                            fill="#ffffff" stroke="none">
+                                            <path
+                                                d="M610 3989 l0 -624 430 -430 430 -430 -430 -430 -430 -430 0 -623 0 -622 30 0 c17 0 74 5 128 11 500 54 965 273 1312 619 153 153 250 279 359 470 l67 117 29 -56 c321 -624 952 -1057 1666 -1146 68 -8 140 -15 161 -15 l38 0 0 622 0 623 -431 431 -432 432 432 427 431 428 0 623 0 624 -43 0 c-108 0 -351 -40 -492 -81 -426 -124 -795 -364 -1082 -704 -68 -80 -190 -264 -238 -357 l-39 -75 -60 108 c-355 636 -1014 1054 -1741 1105 l-95 7 0 -624z m379 394 c429 -93 826 -339 1111 -688 184 -226 328 -527 385 -807 l21 -107 13 77 c18 108 73 284 126 405 269 611 860 1055 1533 1151 l42 6 0 -487 0 -488 -470 -470 -470 -470 470 -470 470 -470 0 -487 0 -487 -37 6 c-84 12 -267 56 -355 85 -664 220 -1161 770 -1303 1441 -13 62 -24 101 -24 87 -1 -42 -57 -259 -89 -345 -206 -557 -658 -992 -1227 -1183 -85 -28 -274 -73 -357 -85 l-38 -6 0 494 0 493 470 464 470 463 -470 470 -470 470 0 488 0 487 43 -6 c23 -3 93 -17 156 -31z" />
+                                            <path
+                                                d="M880 3892 l0 -417 485 -485 c267 -266 485 -487 485 -489 0 -2 -218 -220 -485 -484 l-485 -479 0 -420 0 -420 43 7 c66 11 269 71 339 101 525 220 909 624 1079 1134 72 216 83 294 83 565 1 272 -11 346 -84 568 -200 601 -720 1070 -1348 1218 -45 10 -89 19 -97 19 -13 0 -15 -58 -15 -418z m387 117 c276 -124 555 -362 718 -613 181 -279 266 -562 266 -890 1 -271 -51 -487 -175 -734 -188 -374 -546 -686 -944 -823 -30 -10 -59 -19 -64 -19 -4 0 -8 118 -8 262 l0 263 525 525 525 525 -525 525 -525 525 0 267 0 268 71 -26 c38 -14 100 -39 136 -55z" />
+                                            <path
+                                                d="M3995 4286 c-797 -208 -1366 -878 -1414 -1665 -39 -655 264 -1258 821 -1630 126 -85 260 -154 391 -202 81 -30 295 -89 323 -89 12 0 14 62 14 419 l0 419 -486 481 c-435 431 -485 483 -472 499 7 9 226 229 486 489 l472 472 0 415 0 416 -22 0 c-13 -1 -63 -12 -113 -24z m-570 -1256 l-525 -525 525 -525 525 -525 0 -262 c0 -158 -4 -263 -9 -263 -23 0 -164 56 -254 101 -174 88 -296 175 -436 312 -292 287 -458 640 -490 1045 -57 715 389 1400 1084 1663 l100 38 3 -267 2 -267 -525 -525z" />
+                                        </g>
+                                    </svg>
+                                    Cines App
+                                    </a>
+                                </div>
+                                <div class="titulo col-md-2 "><a href="{% url 'listado' %}">Noticias</a>
+                                </div>
+                                <div class="titulo col-md-2"><a href="{% url 'listado' %}">Destacadas</a>
+
+
+                                </div>
+                                <div class="titulo col col-md-2"><a href="{% url 'listado' %}">Películas</a>
+
+
+                                </div>
+
+                                <div class="titulo col-md-2">
+                                    <a href="#peliculas">
+                                    <div class="divForm">
+                                        <form class="formBusqueda" method="GET" action="/search?" id="searchBoxForm">
+                                            <div class="searchContainer">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="lupaBusqueda" width="16"
+                                                    height="16" fill="#000000" class="bi bi-search" viewBox="0 0 16 16">
+                                                    <path class="lupaBusqueda"
+                                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                                </svg><input name="keywords" type="text" value="" id="barraBusqueda"
+                                                    placeholder="Buscar" class="Search__input" autocomplete="off">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    </a>
+                                </div>
+                                <div class="titulo col-md-2 text-nowrap" id="divCuentas">
+                                    {% if not request.user.is_authenticated %}
+                                    <span id="registrarseID"><a href="{% url 'registro' %}"> Registrarse</a></span> 
+                                    <span id="iniciarID"><a href="{% url 'iniSesion' %}">Iniciar Sesion</a></span>
+                                    {% else %}
+                                        <a href="{% url 'logout' %}">Mi cuenta</a>
+                                        <a href="{% url 'logout' %}">Salir</a>
+                                    {% endif %}
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-1 col-sm-1"></div>
+                    </div>
+                </div>
+                <!-- <div class="col-md-2 col-sm-1"></div> -->
+            </div>
+        </div>
+    </header>
 
 <div class="contentUsuario">
     <div>
@@ -7,8 +117,9 @@
             <p>Bienvenido {{user.first_name}}</p>
             <p id="subtituloUser">Tus entradas:</p>
         </div>
-        <div>
+        <div id="divCrearEntradas">
                 {% for entrada in entradas %}
+
                   
                         <div id="listarPelicula">
                             <div id="divListarImg">
@@ -18,7 +129,7 @@
                                 <p id="nombrePelicula">{{ pelicula_por_entrada.0 }}</p>
                                 <p id="kmPelicula">{{ funcion_por_entrada.0.fecha }} - {{ funcion_por_entrada.0.fechaInicio|time }}</p>
                                 <p id="kmPelicula">{{ sala_por_entrada.0.nombre }}</p>
-                                <p id="kmPelicula"> Butacas:
+                                <p id="kmPelicula"> Butacas: {{entradas.count}}
                                     {% for butaca in butacas_por_entrada.0 %}
                                         {{ butaca.numero }}
                                         {% if not forloop.last %}
@@ -34,8 +145,44 @@
                     <li>No se encontraron entradas asignadas.</li>
                 {% endfor %}
             </ul>
+            {% for pelicula in pelicula_por_entrada %}
+            <p class="peliculaTituloJS">{{pelicula.titulo}}</p>
+        {% endfor %}
+        {% for pelicula in pelicula_por_entrada %}
+            <p class="peliculaImagenUrlJS">{{pelicula.imagen.url}}</p>
+        {% endfor %}
+        {% for pelicula in pelicula_por_entrada %}
+            <p class="peliculaIdJS">{{pelicula.id}}</p>
+        {% endfor %}
+        {% for funcion in funcion_por_entrada %}
+            <p class="funcionJS">{{funcion.fecha}} - {{ funcion.fechaInicio|time }}</p>
+        {% endfor %}
+        {% for sala in sala_por_entrada %}
+            <p class="salaJS">{{sala.nombre}}</p>
+        {% endfor %}
+        {% for butacas in butacas_por_entrada %}
+            <p class="butacasJS">{% for butaca in butacas %}
+               {{ butaca.numero }}
+                {% if not forloop.last %}
+                ,
+                {% endif %}
+            {% endfor %}</p>
+        {% endfor %}
+        {% for entrada in entradas %}
+            <p class="precioJS">{{entrada.precio}}</p>
+        {% endfor %}
         </div>
     </div>
 </div>
 
-{% endblock %}
+
+<footer class="bg-dark text-white text-center p-3 mt-5" id="footDetail">
+    <h4>Contáctanos</h4>
+    &copy; 2023 CinesApp. Todos los derechos reservados.
+
+</footer>
+
+</body>
+
+
+</html>

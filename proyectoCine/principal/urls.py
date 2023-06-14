@@ -12,7 +12,7 @@ urlpatterns = [
     path('crearComentario', views.crearComentario, name="crearComentario"),
     path('borrarComentario/<int:identificador>/<int:id_p>', views.borrarComentario, name="borrarComentario"),
     path('updateComentario/<int:id_p>', views.updateComentario, name="updateComentario"),
-    path('administracion/',  views.administracion ,name='administracion'),
+    path('administracion/',  PeliculaAdminListView.as_view() ,name='administracion'),
     path('administracion/peliculas',  PeliculaAdminListView.as_view() ,name='listadoPelisAdmin'),
     path('administracion/peliculas/crear',  PeliculaCreatelView.as_view() ,name='crearPelisAdmin'),
     path('modificarPelicula/<int:pk>', PeliculaUpdateView.as_view(), name="modificarPelicula"),
@@ -33,4 +33,5 @@ urlpatterns = [
     path('miCuenta/<int:pk>/', UsuarioDetailView.as_view(), name='miCuenta'),
     path('administracion/comentario',  ComentarioAdminListView.as_view() ,name='listadoComentariosAdmin'),
     path('borrarComentario/<int:pk>', ComentarioAdminDeleteView.as_view(), name="borrarComentario"),
+    path('administracion/entradas',  EntradaAdminListView.as_view() ,name='listadoEntradasAdmin'),
 ]
