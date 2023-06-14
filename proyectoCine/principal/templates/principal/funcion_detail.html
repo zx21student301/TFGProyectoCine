@@ -47,8 +47,28 @@
                     <p>Película: {{funcion.pelicula}}</p>
                     <p>Hora inicio:  {{funcion.fechaInicio|time:"H:i"}} - {{funcion.fechaInicio|date:"d/m/Y"}}
                     <p>Cantidad de boletos: <span id="numEntradas">0</span></p>
-                    <p>Precio entrada: 8.50€</p>
-                    <p>Total: <span id="totalEntradas"></span></p>
+                    <p>Precio entrada: <span id="precioPorEntrada">8.50€</span></p>
+                    <p>Total: <span id="descuentoShow"></span> <span id="totalEntradas"></span>€</p>
+                    <br>
+                    <table>
+                        <tr>
+                            <td>
+                                <p>Codigo de descuento:</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input id="inputDescuento" type="text" name="titulo" maxlength="700" >
+                            </td>
+                            <td>
+                                <input id="botonDesc" type="submit" class="button button-block" value="Aplicar">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="errorDesc">
+                            </td>
+                        </tr>
+                    </table>
                      
                 </div>
             </section>

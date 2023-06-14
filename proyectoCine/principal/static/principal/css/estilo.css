@@ -333,7 +333,7 @@ a:hover {
 }
 
 .divCuentas input,
-.divCuentas textarea {
+.divCuentas textarea, #inputDescuento {
   font-size: 22px;
   display: block;
   width: 100%;
@@ -348,7 +348,7 @@ a:hover {
 }
 
 .divCuentas input:focus,
-.divCuentas textarea:focus {
+.divCuentas textarea:focus, #inputDescuento:focus{
   outline: 0;
   border-color: #1ab188;
 }
@@ -379,7 +379,7 @@ a:hover {
   margin: 0;
 }
 
-.divCuentas .button {
+.divCuentas .button, #botonDesc{
   border: 0;
   outline: none;
   border-radius: 0;
@@ -394,8 +394,17 @@ a:hover {
 }
 
 .divCuentas .button:hover,
-.divCuentas .button:focus {
+.divCuentas .button:focus , 
+#botonDesc:hover{
   background: #0d8b6e;
+}
+
+#botonDesc{
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: 24px;
+  padding: 10px 20px;
+  border-radius: 15px;
 }
 
 .divCuentas .button-block {
@@ -472,6 +481,7 @@ margin-left: 20px;
 }
 
 #secondDiv{
+  margin-top: 150px;
   transition: transform 0.5s ease-out;
   width: fit-content;
   height: fit-content;
@@ -669,4 +679,18 @@ margin-left: 20px;
   margin-top: 30px;
   margin-bottom: -30px;
 
+}
+
+#contDesc{
+  width: 100%;
+  display: inline-block;
+}
+
+#contDesc input, #contDesc p{
+  display: inline-block;
+}
+
+#descuentoShow {
+  color: #ad2c39;
+  text-decoration: line-through;
 }

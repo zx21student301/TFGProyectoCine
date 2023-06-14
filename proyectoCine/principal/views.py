@@ -44,12 +44,12 @@ class PeliculaDetailView(DetailView):
         context['users'] = users
         return context
 
+
 @login_required
 def administracion(request):
     template = loader.get_template("principal/administracion.html")
     return HttpResponse(template.render())
 
-        
 
 @method_decorator(login_required, name='dispatch')
 class PeliculaAdminListView(ListView):
@@ -57,12 +57,14 @@ class PeliculaAdminListView(ListView):
     template_name = 'principal/administracionPeliculas.html'
     context_object_name = 'peliculas'
 
+
 @method_decorator(login_required, name='dispatch')
 class PeliculaCreatelView(CreateView):
     model = Pelicula
     fields = ['titulo', 'imagen', 'genero', 'duracion', 'sinopsis',
               'director', 'fechaLanzamiento', 'clasificacionEdad', 'disponible']
     success_url = reverse_lazy('listadoPelisAdmin')
+
 
 @method_decorator(login_required, name='dispatch')
 class PeliculaUpdateView(UpdateView):
@@ -72,10 +74,12 @@ class PeliculaUpdateView(UpdateView):
     template_name_suffix = '_update_form'
     success_url = reverse_lazy('listadoPelisAdmin')
 
+
 @method_decorator(login_required, name='dispatch')
 class PeliculaDeleteView(DeleteView):
     model = Pelicula
     success_url = reverse_lazy('listadoPelisAdmin')
+
 
 @method_decorator(login_required, name='dispatch')
 class SalaAdminListView(ListView):
@@ -83,11 +87,13 @@ class SalaAdminListView(ListView):
     template_name = 'principal/administracionSalas.html'
     context_object_name = 'salas'
 
+
 @method_decorator(login_required, name='dispatch')
 class SalaCreatelView(CreateView):
     model = Sala
     fields = ['nombre', 'capacidadMaxima']
     success_url = reverse_lazy('listadoSalasAdmin')
+
 
 @method_decorator(login_required, name='dispatch')
 class SalaUpdateView(UpdateView):
@@ -96,16 +102,19 @@ class SalaUpdateView(UpdateView):
     fields = ['nombre', 'capacidadMaxima']
     success_url = reverse_lazy('listadoSalasAdmin')
 
+
 @method_decorator(login_required, name='dispatch')
 class SalaDeleteView(DeleteView):
     model = Sala
     success_url = reverse_lazy('listadoSalasAdmin')
+
 
 @method_decorator(login_required, name='dispatch')
 class FuncionAdminListView(ListView):
     model = Funcion
     template_name = 'principal/administracionFunciones.html'
     context_object_name = 'funciones'
+
 
 @method_decorator(login_required, name='dispatch')
 class FuncionCreatelView(CreateView):
@@ -126,6 +135,7 @@ class FuncionCreatelView(CreateView):
 
         return response
 
+
 @method_decorator(login_required, name='dispatch')
 class FuncionUpdateView(UpdateView):
     model = Funcion
@@ -133,10 +143,12 @@ class FuncionUpdateView(UpdateView):
     fields = ['fecha', 'fechaInicio', 'fechaFin', 'pelicula', 'sala']
     success_url = reverse_lazy('listadoFuncionesAdmin')
 
+
 @method_decorator(login_required, name='dispatch')
 class FuncionDeleteView(DeleteView):
     model = Funcion
     success_url = reverse_lazy('listadoFuncionesAdmin')
+
 
 @method_decorator(login_required, name='dispatch')
 class ButacaAdminListView(ListView):
@@ -144,6 +156,7 @@ class ButacaAdminListView(ListView):
     template_name = 'principal/administracionButacas.html'
     context_object_name = 'butacas'
     ordering = ['funcion__id', 'numero']
+
 
 @method_decorator(login_required, name='dispatch')
 class ButacaUpdateView(UpdateView):
@@ -197,17 +210,20 @@ def crearComentario(request):
     c = request.GET['comentario']
     p = request.GET['puntuacion']
 
-    coment = Comentario(usuario = id_u, pelicula = pelicula, comentario = c, puntuacion = p)
+    coment = Comentario(usuario=id_u, pelicula=pelicula,
+                        comentario=c, puntuacion=p)
     coment.save()
 
     return HttpResponseRedirect(reverse('detalle', args=[id_p]))
 
-def borrarComentario(request,identificador,id_p):
+
+def borrarComentario(request, identificador, id_p):
     Comentario.objects.filter(id=identificador).delete()
 
     return HttpResponseRedirect(reverse('detalle', args=[id_p]))
 
-def updateComentario(request,id_p):
+
+def updateComentario(request, id_p):
     idp = request.GET['comentario_id']
 
     ob = Comentario.objects.get(id=idp)
@@ -220,17 +236,20 @@ def updateComentario(request,id_p):
     ob.save()
 
     return HttpResponseRedirect(reverse('detalle', args=[id_p]))
-    
+
+
 @csrf_exempt
 def modificar_butaca(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         entrada_id = data.get('entradaId')
-        butaca_id = data.get('butacaId') # Obtiene el ID de la butaca desde la solicitud
+        # Obtiene el ID de la butaca desde la solicitud
+        butaca_id = data.get('butacaId')
 
         # Realiza la modificación de la butaca en la base de datos
         try:
-            butaca = Butaca.objects.get(id=butaca_id) # Utiliza el ID de la butaca para obtener el objeto de la base de datos
+            # Utiliza el ID de la butaca para obtener el objeto de la base de datos
+            butaca = Butaca.objects.get(id=butaca_id)
             # Modifica los campos de la butaca según tus necesidades
             entrada = Entrada.objects.get(id=entrada_id)
             butaca.entrada = entrada
@@ -245,11 +264,10 @@ def modificar_butaca(request):
             response_data = {'error': 'La butaca no existe'}
             return JsonResponse(response_data, status=400)
 
+
 @method_decorator(login_required, name='dispatch')
 class UsuarioDetailView(DetailView):
     model = User
-
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -260,7 +278,8 @@ class UsuarioDetailView(DetailView):
         sala_por_entrada = []
         pelicula_por_entrada = []
         for entrada in entradas:
-            butacas = Butaca.objects.filter(entrada=entrada).order_by('-created')
+            butacas = Butaca.objects.filter(
+                entrada=entrada).order_by('-created')
             butacas_por_entrada.append(butacas)
             if butacas.exists():
                 funcion = butacas.first().funcion
@@ -269,7 +288,7 @@ class UsuarioDetailView(DetailView):
                 sala_por_entrada.append(sala)
                 funcion_por_entrada.append(funcion)
                 pelicula_por_entrada.append(pelicula)
-        
+
         context['entradas'] = entradas
         context['butacas_por_entrada'] = butacas_por_entrada
         context['funcion_por_entrada'] = funcion_por_entrada
@@ -277,11 +296,13 @@ class UsuarioDetailView(DetailView):
         context['sala_por_entrada'] = sala_por_entrada
         return context
 
+
 @method_decorator(login_required, name='dispatch')
 class ComentarioAdminListView(ListView):
     model = Comentario
     template_name = 'principal/administracionComentario.html'
     context_object_name = 'comentarios'
+
 
 @method_decorator(login_required, name='dispatch')
 class ComentarioAdminDeleteView(DeleteView):
@@ -289,9 +310,63 @@ class ComentarioAdminDeleteView(DeleteView):
     success_url = reverse_lazy('listadoComentariosAdmin')
 
 
-
 @method_decorator(login_required, name='dispatch')
 class EntradaAdminListView(ListView):
     model = Entrada
     template_name = 'principal/administracionEntradas.html'
     context_object_name = 'entradas'
+
+
+@csrf_exempt
+def comprobarPromocion(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        nombre = data.get('nombre')
+        print(nombre)
+
+        try:
+            # Buscar la promoción por su nombre en la base de datos
+            promocion = Promocion.objects.get(nombre=nombre)
+            descuento = promocion.descuento  # Obtener el descuento de la promoción
+            tipoDescuento = promocion.tipoDescuento
+            maxDescuento = promocion.maxDescuento
+
+            # Devolver una respuesta JSON indicando que el código existe y el descuento
+            response_data = {'exists': True, 'descuento': descuento,
+                             'tipoDescuento': tipoDescuento, 'maxDescuento': maxDescuento}
+            return JsonResponse(response_data)
+        except Promocion.DoesNotExist:
+            # Devolver una respuesta JSON indicando que el código no existe
+            response_data = {'exists': False}
+            return JsonResponse(response_data)
+
+    # Devolver una respuesta JSON indicando que la solicitud no es válida si no es una solicitud POST
+    response_data = {'error': 'Solicitud no válida'}
+    return JsonResponse(response_data)
+
+
+@method_decorator(login_required, name='dispatch')
+class PromocionAdminListView(ListView):
+    model = Promocion
+    template_name = 'principal/administracionPromociones.html'
+    context_object_name = 'promociones'
+
+
+@method_decorator(login_required, name='dispatch')
+class PromocionCreatelView(CreateView):
+    model = Promocion
+    fields = ['nombre', 'descripcion', 'descuento', 'tipoDescuento', 'maxDescuento']
+    success_url = reverse_lazy('listadoPromocionesAdmin')
+
+@method_decorator(login_required, name='dispatch')
+class PromocionUpdateView(UpdateView):
+    model = Promocion
+    template_name_suffix = '_update_form'
+    fields = ['nombre', 'descripcion', 'descuento', 'tipoDescuento', 'maxDescuento']
+    success_url = reverse_lazy('listadoPromocionesAdmin')
+
+
+@method_decorator(login_required, name='dispatch')
+class PromocionDeleteView(DeleteView):
+    model = Promocion
+    success_url = reverse_lazy('listadoPromocionesAdmin')

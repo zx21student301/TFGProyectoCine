@@ -34,4 +34,9 @@ urlpatterns = [
     path('administracion/comentario',  ComentarioAdminListView.as_view() ,name='listadoComentariosAdmin'),
     path('borrarComentario/<int:pk>', ComentarioAdminDeleteView.as_view(), name="borrarComentario"),
     path('administracion/entradas',  EntradaAdminListView.as_view() ,name='listadoEntradasAdmin'),
+    path('funcion/comprobarPromocion/', comprobarPromocion, name='comprobarPromocion'),
+    path('administracion/promociones',  PromocionAdminListView.as_view() ,name='listadoPromocionesAdmin'),
+    path('administracion/promociones/crear',  PromocionCreatelView.as_view() ,name='crearPromocionesAdmin'),
+    path('modificarPromocion/<int:pk>', PromocionUpdateView.as_view(), name="modificarPromocion"),
+    path('borrarPromocion/<int:pk>', PromocionDeleteView.as_view(), name="borrarPromocion"),
 ]
