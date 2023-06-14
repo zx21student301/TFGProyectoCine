@@ -1,0 +1,22 @@
+{% extends 'principal/administracion.html' %}
+{% block contenido %}
+
+<div class="content">
+    <div class="listaDiv">
+      <div class="divCuentas">
+        <form action="" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div id="custom-formulario">
+            <h1 id="tituloForm">Añardir Funcion</h1>
+          </div>
+          <table id="miTabla">
+            {{ form.as_table }}
+          </table>
+          <br>
+          <input type="submit" class="button button-block" value="Añadir">
+        </form>
+      </div>
+    </div>
+  </div>
+  
+{% endblock %}

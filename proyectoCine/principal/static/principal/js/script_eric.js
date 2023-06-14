@@ -37,7 +37,7 @@ $(document).ready(
       $('#numEntradas').empty();
       $('#numEntradas').html(entradas);
       $('#totalEntradas').empty();
-      $('#totalEntradas').html((entradas * 8.50) + ('€'));
+      $('#totalEntradas').html((entradas * 8.50));
 
       precio = entradas * 8.50
 
@@ -152,13 +152,77 @@ $(document).ready(
     $('.barra_ver').prop('disabled', true);
 
 
-    console.log($('#divCrearEntradas').remove())
+    $('#botonDesc').click(function (event) {
+      event.preventDefault();
+    
+      // Obtener el valor del código de promoción del formulario
+      console.log(document.getElementById('inputDescuento').value)
+      var codigoPromocion = document.getElementById('inputDescuento').value;
+    
+      // Enviar una solicitud al servidor para verificar el código de promoción
+      fetch('comprobarPromocion/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': '{{ csrf_token }}',
+        },
+        body: JSON.stringify({ nombre: codigoPromocion }),
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          // Manejo de la respuesta del servidor
+    
+          if (data.exists) {
+            $('#errorDesc').empty();
 
-    numEntradas = "{{entradas}}"
-    $('#divCrearEntradas').remove()
-    console.log(entradas)
+            // El código de promoción existe en la base de datos
+            var descuento = data.descuento;
+            var tipoDescuento = data.tipoDescuento;
+            var maxDescuento = data.maxDescuento;
 
+            console.log(descuento,tipoDescuento,maxDescuento)
+            if (tipoDescuento=="total") {
+              if (precio>maxDescuento) {
+                precioNuevo = precio-descuento 
+                $('#precioPorEntrada').html((precioNuevo/entradas).toFixed(2)+"€")
+                $('#descuentoShow').html(precio+'€ - '+descuento+'€ =')
+                $('#totalEntradas').html(" "+precioNuevo)
 
+              } else {
+                $('#errorDesc').html('El precio minimo para aplicar el descuento es de'+maxDescuento+'€');
+              }
+
+            } else if (tipoDescuento=="porcentaje") {
+              descuentoR =precio*descuento/100
+              if (precio>maxDescuento) {
+                descuentoR =precio*descuento/100
+                precioNuevo = precio-descuentoR 
+                $('#precioPorEntrada').html((precioNuevo/entradas).toFixed(2)+"€")
+                $('#descuentoShow').html(precio+'€ - '+descuento+'% =')
+                $('#totalEntradas').html(" "+precioNuevo)
+
+              } else {
+                $('#errorDesc').html('El precio minimo para aplicar el descuento es de'+maxDescuento+'€');
+              }
+              
+            }
+    
+            // Continuar con el resto del código para enviar los datos al servidor
+            // ...
+    
+          } else {
+            // El código de promoción no existe en la base de datos
+            $('#errorDesc').html('El código de promoción no es válido');
+          }
+        })
+        .catch(function (error) {
+          // Manejo de errores
+          console.error(error);
+        });
+    });
+    
   }
 
 
