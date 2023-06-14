@@ -185,23 +185,24 @@ $(document).ready(
             console.log(descuento,tipoDescuento,maxDescuento)
             if (tipoDescuento=="total") {
               if (precio>maxDescuento) {
-                precioNuevo = precio-descuento 
-                $('#precioPorEntrada').html((precioNuevo/entradas).toFixed(2)+"€")
-                $('#descuentoShow').html(precio+'€ - '+descuento+'€ =')
-                $('#totalEntradas').html(" "+precioNuevo)
+                precioAntiguo=precio
+                precio = precioAntiguo-descuento 
+                $('#precioPorEntrada').html((precioAntiguo/entradas).toFixed(2)+"€")
+                $('#descuentoShow').html(precioAntiguo+'€ - '+descuento+'€ =')
+                $('#totalEntradas').html(" "+precio)
 
               } else {
                 $('#errorDesc').html('El precio minimo para aplicar el descuento es de'+maxDescuento+'€');
               }
 
             } else if (tipoDescuento=="porcentaje") {
-              descuentoR =precio*descuento/100
               if (precio>maxDescuento) {
-                descuentoR =precio*descuento/100
-                precioNuevo = precio-descuentoR 
-                $('#precioPorEntrada').html((precioNuevo/entradas).toFixed(2)+"€")
-                $('#descuentoShow').html(precio+'€ - '+descuento+'% =')
-                $('#totalEntradas').html(" "+precioNuevo)
+                precioAntiguo=precio
+                descuentoR =precioAntiguo*descuento/100
+                precio = precioAntiguo-descuentoR 
+                $('#precioPorEntrada').html((precio/entradas).toFixed(2)+"€")
+                $('#descuentoShow').html(precioAntiguo+'€ - '+descuento+'% =')
+                $('#totalEntradas').html(" "+precio)
 
               } else {
                 $('#errorDesc').html('El precio minimo para aplicar el descuento es de'+maxDescuento+'€');
